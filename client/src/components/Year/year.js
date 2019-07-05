@@ -1,11 +1,10 @@
 import React from 'react';
 
 function Year(props){
-    console.log(props)
-
+    // console.log(props)
     return(
         <p>
-            {props.year}
+            year: {props.year}
         </p>
     )
 }

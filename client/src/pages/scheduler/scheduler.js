@@ -1,19 +1,33 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
-import DeleteBtn from "../../components/DeleteBtn";
+// import DeleteBtn from "../../components/DeleteBtn";
 import Year from "../../components/Year";
-import API from "../../utils/API";
+import Months from '../../components/Months';
+import Weeks from '../../components/Weeks';
+// import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+// import { List, ListItem } from "../../components/List";
+// import { Input, TextArea, FormBtn } from "../../components/Form";
 const moment = require('moment')
+
+// const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+const weeks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]
+
+let years = []
+for (let i = 2015; i <= moment().format('YYYY'); i++) { //update this to current year when done
+  years.push(i);
+}
+
+const weekOfYear = (month, year) => parseInt(moment(month + ' ' + year, "M-YYYY").week())
+
 
 class Scheduler extends Component {
   // Setting our component's initial state
   state = {
-    year: moment().format('YYYY'),
-    month: moment().format('MMMM'),
-    day: moment().format('D'),
+    selectedYear: moment().format('YYYY'),
+    selectedMonth: moment().format('M'),
+    selectedWeek: moment().format('W'),
     rows: [
       {
         time: '9:15',
@@ -84,13 +98,31 @@ class Scheduler extends Component {
   //   }
   // };
 
-  currentYear = () => moment().format('YYYY')
+  // years = () => {//basic idea of this function laid out, needs to be programmed and implemented
+
+
+  //   {
+  //     years.map(year => {
+  //       return (
+  //         <Year year={year} />
+  //       )
+  //     })
+  //   }
+  // }
+
+  expandMonths = () => {
+    console.log('hello')
+    months.map(month => {
+      return (
+        <div>
+          {month}
+        </div>
+      )
+    })
+  }
 
   render() {
-    let years = []
-    for (let i = 2015; i <= this.currentYear(); i++) { //update this to current year when done
-      years.push(i);
-    }
+
 
     return (
       <Container fluid>
@@ -99,26 +131,52 @@ class Scheduler extends Component {
             <Jumbotron>
               <h1>Today's Date</h1>
             </Jumbotron>
-            {/* <Year newYear={years} /> */}
             {years.map(year => {
-              console.log(year)
-                return(
-                <Year year = {year}/>
-                )
-            })}
-            {/* <List>
-                    <ListItem>
-                      2017
-                    </ListItem>
-                    <ListItem>
-                      2018
-                    </ListItem>
-                    <ListItem>
-                      2019
-                    </ListItem>
-                      <p>{this.state.month} {this.state.day}, {this.state.year}</p>
+              // console.log('year: ' + year)
+              // console.log('this.state.selectedYear: ' + this.state.selectedYear)
+              // console.log(year == this.state.selectedYear)
+              if (year == this.state.selectedYear) {
+                return (
+                  <div>
+                    <Year
+                      year={year}
+                    />
+                    {months.map(month => {
 
-              </List> */}
+                      if (month == this.state.selectedMonth) {
+                        return (
+                          <div>
+                          <Months
+                            month={month}
+                          />
+                          {weeks.map(week => {
+                            if(week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)){
+                              return(
+                                <Weeks
+                                  week = {week}
+                                />
+                              )
+                            }
+                          })}
+                          </div>
+                        )
+                      } else {
+                        return (
+                          <Months
+                            month={month}
+                          />
+                        )
+                      }
+                    })}
+                  </div>
+                )
+              }
+              return (
+                <Year
+                  year={year}
+                />
+              )
+            })}
           </Col>
         </Row>
       </Container>
