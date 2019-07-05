@@ -4,6 +4,7 @@ import Jumbotron from "../../components/Jumbotron";
 import Year from "../../components/Year";
 import Months from '../../components/Months';
 import Weeks from '../../components/Weeks';
+import WeekSchedule from '../../components/WeekSchedule'
 // import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
@@ -54,72 +55,91 @@ class Scheduler extends Component {
     ]
   }
 
-  // When the component mounts, load all books and save them to this.state.books
-  // componentDidMount() {
-  //   this.loadBooks();
-  // }
-
-  // Loads all books  and sets them to this.state.books
-  // loadBooks = () => {
-  //   API.getBooks()
-  //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-  // // Deletes a book from the database with a given id, then reloads books from the db
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadBooks())
-  //     .catch(err => console.log(err));
-  // };
-
-  // // Handles updating component state when the user types into the input field
-  // handleInputChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
-
-  // When the form is submitted, use the API.saveBook method to save the book data
-  // Then reload books from the database
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   if (this.state.title && this.state.author) {
-  //     API.saveBook({
-  //       title: this.state.title,
-  //       author: this.state.author,
-  //       synopsis: this.state.synopsis
-  //     })
-  //       .then(res => this.loadBooks())
-  //       .catch(err => console.log(err));
-  //   }
-  // };
   handleClick = (type, value) => {
-    switch(type){
-      case 'year': 
-        this.setState({
-          selectedYear: value,
-          selectedMonth: null,
-          selectedWeek: null
-        })
+    switch (type) {
+      case 'year':
+        if (value == this.state.selectedYear) {
+          this.setState({
+            selectedYear: null,
+            selectedMonth: null,
+            selectedWeek: null
+          })
+        } else {
+          this.setState({
+            selectedYear: value,
+            selectedMonth: null,
+            selectedWeek: null
+          })
+        }
+
         break;
-      
-      case 'month':
+
+      case 'month': //TODO: Why won't month collapse when selected month state is set to null
+        if (value == this.state.selctedMonth) {
+          this.setState({
+            selectedMonth: null,
+            selectedWeek: null
+          })
+        } else {
           this.setState({
             selectedMonth: value,
             selectedWeek: null
           })
+        }
         break;
-      
+
       case 'week':
-          this.setState({selectedWeek: value})
+        if (value == this.state.selectedWeek) { this.setState({ selectedWeek: null }) }
+        else { this.setState({ selectedWeek: value }) }
         break;
 
       default:
         break;
+    }
+  }
+
+  renderMonths = (year) => {
+
+    {
+      months.map(month => {
+        if (month == this.state.selectedMonth) {
+          return (
+            <div>
+              <Months
+                month={month}
+                handleClick={this.handleClick}
+                monthNames={monthNames}
+              />
+              {this.renderWeeks(month, year)}
+            </div>
+          )
+        } else {
+          return (
+            <Months
+              month={month}
+              handleClick={this.handleClick}
+              monthNames={monthNames}
+            />
+          )
+        }
+      })
+    }
+  }
+
+  renderWeeks = (month, year) => {
+    {
+      weeks.map(week => {
+        if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
+          return (
+            <Weeks
+              week={week}
+              handleClick={this.handleClick}
+              weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
+              weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
+            />
+          )
+        }
+      })
     }
   }
 
@@ -138,38 +158,55 @@ class Scheduler extends Component {
                   <div>
                     <Year
                       year={year}
-                      handleClick = {this.handleClick}
+                      handleClick={this.handleClick}
                     />
+                    {/* {this.renderMonths(year)} */} {/*The render months function is typed out below*/}
                     {months.map(month => {
-
                       if (month == this.state.selectedMonth) {
                         return (
                           <div>
-                          <Months
-                            month={month}
-                            handleClick = {this.handleClick}
-                            monthNames = {monthNames}
-                          />
-                          {weeks.map(week => {
-                            if(week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)){
-                              return(
-                                <Weeks
-                                  week = {week}
-                                  handleClick = {this.handleClick}
-                                  weekDisplayStart = {moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
-                                  weekDisplayEnd = {moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
-                                />
-                              )
-                            }
-                          })}
+                            <Months
+                              month={month}
+                              handleClick={this.handleClick}
+                              monthNames={monthNames}
+                            />
+                            {weeks.map(week => {
+                              if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
+                                if(week == this.state.selectedWeek){
+                                  return(
+                                    <div>
+                                      <Weeks
+                                        week={week}
+                                        handleClick={this.handleClick}
+                                        weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
+                                        weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
+                                      />
+                                      <WeekSchedule 
+                                        week = {week}
+                                        year = {year}
+                                      />
+                                    </div>
+                                  )
+                                } else{
+                                  return (
+                                    <Weeks
+                                      week={week}
+                                      handleClick={this.handleClick}
+                                      weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
+                                      weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
+                                    />
+                                  )
+                                }
+                              }
+                            })}
                           </div>
                         )
                       } else {
                         return (
                           <Months
                             month={month}
-                            handleClick = {this.handleClick}
-                            monthNames = {monthNames}
+                            handleClick={this.handleClick}
+                            monthNames={monthNames}
                           />
                         )
                       }
@@ -180,7 +217,7 @@ class Scheduler extends Component {
               return (
                 <Year
                   year={year}
-                  handleClick = {this.handleClick}
+                  handleClick={this.handleClick}
                 />
               )
             })}
