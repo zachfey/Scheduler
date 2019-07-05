@@ -1,4 +1,6 @@
 import React from "react";
+import RowType from '../RowType'
+import RowDetail from '../RowDetail'
 const moment = require('moment')
 
 function WeekSchedule(props) {
@@ -9,8 +11,6 @@ function WeekSchedule(props) {
         dateArray.push(moment(date).add(i,'day').format('D-MMM'))
     }
 
-    console.log(dateArray)
-    // console.log('inside weeks!')
     return (
         <table>
             <tr>
@@ -20,6 +20,27 @@ function WeekSchedule(props) {
             <tr>
                 <th></th>
                 {dateArray.map(date => <th>{date}</th>)}
+            </tr>
+                {props.rows.map(row => {
+                    return(
+                        <tr>
+                            <RowType 
+                                time = {row.time}
+                                type = {row.type}
+                            />
+                            {row.days.map(day => {
+                                return(
+                                <RowDetail 
+                                    numGuests = {day.numGuests}
+                                    guides = {day.guides}
+                                />
+                                )
+                            })}
+                        </tr>
+                    )
+                })}
+            <tr>
+
             </tr>
         </table>
     )

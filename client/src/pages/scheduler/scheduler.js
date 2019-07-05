@@ -33,7 +33,7 @@ class Scheduler extends Component {
       {
         time: '9:15',
         type: 'Section IV',
-        day: [{
+        days: [{
           numGuests: 22,
           guides: ['Linc', 'Yook', 'Merry', 'Hunter']
         },
@@ -44,13 +44,29 @@ class Scheduler extends Component {
         {
           numGuests: null,
           guides: []
+        },
+        {
+          numGuests: 13,
+          guides: []
+        },
+        {
+          numGuests: 14,
+          guides: []
+        },
+        {
+          numGuests: 15,
+          guides: []
+        },
+        {
+          numGuests: 16,
+          guides: []
         }
         ]
       },
       {
         time: '11:30',
         type: 'Section III',
-        day: []
+        days: []
       }
     ]
   }
@@ -184,6 +200,7 @@ class Scheduler extends Component {
                                       <WeekSchedule 
                                         week = {week}
                                         year = {year}
+                                        rows = {this.state.rows}
                                       />
                                     </div>
                                   )
