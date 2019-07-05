@@ -7,7 +7,7 @@ function Weeks(props) {
         <div>
             <br />
             <button onClick={() => props.handleClick('week', props.week)}>
-                Week: {props.week}
+                Week {props.week} ({props.weekDisplayStart} - {props.weekDisplayEnd})
             </button>
         </div>
     )

@@ -6,7 +6,7 @@ const Year = (props) => {
         <div>
             <br />
             <button onClick={() => props.handleClick('year', props.year)}>
-                year: {props.year}
+                {props.year}
             </button>
         </div>
     )

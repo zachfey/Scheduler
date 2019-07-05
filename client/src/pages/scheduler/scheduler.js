@@ -10,7 +10,7 @@ import { Col, Row, Container } from "../../components/Grid";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 const moment = require('moment')
 
-// const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 const weeks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]
 
@@ -100,11 +100,18 @@ class Scheduler extends Component {
   handleClick = (type, value) => {
     switch(type){
       case 'year': 
-        this.setState({selectedYear: value})
+        this.setState({
+          selectedYear: value,
+          selectedMonth: null,
+          selectedWeek: null
+        })
         break;
       
       case 'month':
-          this.setState({selectedMonth: value})
+          this.setState({
+            selectedMonth: value,
+            selectedWeek: null
+          })
         break;
       
       case 'week':
@@ -141,6 +148,7 @@ class Scheduler extends Component {
                           <Months
                             month={month}
                             handleClick = {this.handleClick}
+                            monthNames = {monthNames}
                           />
                           {weeks.map(week => {
                             if(week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)){
@@ -148,6 +156,8 @@ class Scheduler extends Component {
                                 <Weeks
                                   week = {week}
                                   handleClick = {this.handleClick}
+                                  weekDisplayStart = {moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
+                                  weekDisplayEnd = {moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
                                 />
                               )
                             }
@@ -159,6 +169,7 @@ class Scheduler extends Component {
                           <Months
                             month={month}
                             handleClick = {this.handleClick}
+                            monthNames = {monthNames}
                           />
                         )
                       }

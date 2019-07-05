@@ -7,7 +7,7 @@ function Months(props) {
         <div>
             <br/>
             <button onClick={() => props.handleClick('month', props.month)}>
-                Month: {props.month}
+                {props.monthNames[props.month - 1]}
             </button>
         </div >
     )
