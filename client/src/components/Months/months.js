@@ -4,7 +4,12 @@ function Months(props) {
 
 
     return (
-        <p>Month: {props.month}</p>
+        <div>
+            <br/>
+            <button onClick={() => props.handleClick('month', props.month)}>
+                Month: {props.month}
+            </button>
+        </div >
     )
 
 

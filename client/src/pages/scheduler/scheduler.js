@@ -97,32 +97,26 @@ class Scheduler extends Component {
   //       .catch(err => console.log(err));
   //   }
   // };
+  handleClick = (type, value) => {
+    switch(type){
+      case 'year': 
+        this.setState({selectedYear: value})
+        break;
+      
+      case 'month':
+          this.setState({selectedMonth: value})
+        break;
+      
+      case 'week':
+          this.setState({selectedWeek: value})
+        break;
 
-  // years = () => {//basic idea of this function laid out, needs to be programmed and implemented
-
-
-  //   {
-  //     years.map(year => {
-  //       return (
-  //         <Year year={year} />
-  //       )
-  //     })
-  //   }
-  // }
-
-  expandMonths = () => {
-    console.log('hello')
-    months.map(month => {
-      return (
-        <div>
-          {month}
-        </div>
-      )
-    })
+      default:
+        break;
+    }
   }
 
   render() {
-
 
     return (
       <Container fluid>
@@ -132,14 +126,12 @@ class Scheduler extends Component {
               <h1>Today's Date</h1>
             </Jumbotron>
             {years.map(year => {
-              // console.log('year: ' + year)
-              // console.log('this.state.selectedYear: ' + this.state.selectedYear)
-              // console.log(year == this.state.selectedYear)
               if (year == this.state.selectedYear) {
                 return (
                   <div>
                     <Year
                       year={year}
+                      handleClick = {this.handleClick}
                     />
                     {months.map(month => {
 
@@ -148,12 +140,14 @@ class Scheduler extends Component {
                           <div>
                           <Months
                             month={month}
+                            handleClick = {this.handleClick}
                           />
                           {weeks.map(week => {
                             if(week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)){
                               return(
                                 <Weeks
                                   week = {week}
+                                  handleClick = {this.handleClick}
                                 />
                               )
                             }
@@ -164,6 +158,7 @@ class Scheduler extends Component {
                         return (
                           <Months
                             month={month}
+                            handleClick = {this.handleClick}
                           />
                         )
                       }
@@ -174,6 +169,7 @@ class Scheduler extends Component {
               return (
                 <Year
                   year={year}
+                  handleClick = {this.handleClick}
                 />
               )
             })}

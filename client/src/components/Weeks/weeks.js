@@ -2,9 +2,14 @@ import React from "react";
 
 function Weeks(props) {
 
-// console.log('inside weeks!')
+    // console.log('inside weeks!')
     return (
-        <p>Week: {props.week}</p>
+        <div>
+            <br />
+            <button onClick={() => props.handleClick('week', props.week)}>
+                Week: {props.week}
+            </button>
+        </div>
     )
 
 

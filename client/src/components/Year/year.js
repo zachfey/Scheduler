@@ -1,11 +1,14 @@
 import React from 'react';
 
-function Year(props){
+const Year = (props) => {
     // console.log(props)
-    return(
-        <p>
-            year: {props.year}
-        </p>
+    return (
+        <div>
+            <br />
+            <button onClick={() => props.handleClick('year', props.year)}>
+                year: {props.year}
+            </button>
+        </div>
     )
 }
 
