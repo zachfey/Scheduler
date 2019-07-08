@@ -2,6 +2,8 @@ import React from "react";
 import RowType from '../RowType';
 import RowDetail from '../RowDetail';
 
+
+
 function Row(props) {
     return (
         <tr>
