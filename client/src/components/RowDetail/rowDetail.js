@@ -1,10 +1,18 @@
 import React from "react";
+import Input from '../Input'
+
 
 function RowDetail(props) {
-
-    return (
+    
+    return ( //TODO: Better wy to initialize the input field?
         <td>
-            <p>{props.numGuests}</p>
+            <Input 
+                value={props.numGuests}
+                // onChange={this.handleInputChange}
+                name="numGuests"
+                placeholder={props.numGuests}
+            /> 
+            
             {props.guides.map(guide => <p>{guide}</p>)}
         </td>
     )

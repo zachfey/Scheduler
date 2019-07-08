@@ -16,7 +16,7 @@ const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 const weeks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]
 
 let years = []
-for (let i = 2015; i <= moment().format('YYYY'); i++) { //update this to current year when done
+for (let i = 2015; i <= moment().format('YYYY'); i++) { //TODO: update this to current year when done
   years.push(i);
 }
 
@@ -24,51 +24,11 @@ const weekOfYear = (month, year) => parseInt(moment(month + ' ' + year, "M-YYYY"
 
 
 class Scheduler extends Component {
-  // Setting our component's initial state
+  // Setting the initial state
   state = {
     selectedYear: moment().format('YYYY'),
     selectedMonth: moment().format('M'),
     selectedWeek: moment().format('W'),
-    rows: [
-      {
-        time: '9:15',
-        type: 'Section IV',
-        days: [{
-          numGuests: 22,
-          guides: ['Linc', 'Yook', 'Merry', 'Hunter']
-        },
-        {
-          numGuests: 12,
-          guides: ['Sarah', 'Geoff P']
-        },
-        {
-          numGuests: null,
-          guides: []
-        },
-        {
-          numGuests: 13,
-          guides: []
-        },
-        {
-          numGuests: 14,
-          guides: []
-        },
-        {
-          numGuests: 15,
-          guides: []
-        },
-        {
-          numGuests: 16,
-          guides: []
-        }
-        ]
-      },
-      {
-        time: '11:30',
-        type: 'Section III',
-        days: []
-      }
-    ]
   }
 
   handleClick = (type, value) => {
@@ -87,7 +47,6 @@ class Scheduler extends Component {
             selectedWeek: null
           })
         }
-
         break;
 
       case 'month': //TODO: Why won't month collapse when selected month state is set to null
@@ -114,50 +73,50 @@ class Scheduler extends Component {
     }
   }
 
-  renderMonths = (year) => {
+  // renderMonths = (year) => {
 
-    {
-      months.map(month => {
-        if (month == this.state.selectedMonth) {
-          return (
-            <div>
-              <Months
-                month={month}
-                handleClick={this.handleClick}
-                monthNames={monthNames}
-              />
-              {this.renderWeeks(month, year)}
-            </div>
-          )
-        } else {
-          return (
-            <Months
-              month={month}
-              handleClick={this.handleClick}
-              monthNames={monthNames}
-            />
-          )
-        }
-      })
-    }
-  }
+  //   {
+  //     months.map(month => {
+  //       if (month == this.state.selectedMonth) {
+  //         return (
+  //           <div>
+  //             <Months
+  //               month={month}
+  //               handleClick={this.handleClick}
+  //               monthNames={monthNames}
+  //             />
+  //             {this.renderWeeks(month, year)}
+  //           </div>
+  //         )
+  //       } else {
+  //         return (
+  //           <Months
+  //             month={month}
+  //             handleClick={this.handleClick}
+  //             monthNames={monthNames}
+  //           />
+  //         )
+  //       }
+  //     })
+  //   }
+  // }
 
-  renderWeeks = (month, year) => {
-    {
-      weeks.map(week => {
-        if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
-          return (
-            <Weeks
-              week={week}
-              handleClick={this.handleClick}
-              weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
-              weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
-            />
-          )
-        }
-      })
-    }
-  }
+  // renderWeeks = (month, year) => {
+  //   {
+  //     weeks.map(week => {
+  //       if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
+  //         return (
+  //           <Weeks
+  //             week={week}
+  //             handleClick={this.handleClick}
+  //             weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
+  //             weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
+  //           />
+  //         )
+  //       }
+  //     })
+  //   }
+  // }
 
   render() {
 
@@ -200,7 +159,6 @@ class Scheduler extends Component {
                                       <WeekSchedule 
                                         week = {week}
                                         year = {year}
-                                        rows = {this.state.rows}
                                       />
                                     </div>
                                   )
