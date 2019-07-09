@@ -5,7 +5,7 @@ import Year from "../../components/Year";
 import Months from '../../components/Months';
 import Weeks from '../../components/Weeks';
 import WeekSchedule from '../../components/WeekSchedule'
-// import API from "../../utils/API";
+import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
@@ -30,6 +30,15 @@ class Scheduler extends Component {
     selectedMonth: moment().format('M'),
     selectedWeek: moment().format('W'),
   }
+
+  clickButton(){
+      API.getRows()
+        .then(res =>
+          console.table(res.data))
+        
+        .catch(err => console.log(err));
+    };
+
 
   handleClick = (type, value) => {
 
@@ -132,6 +141,9 @@ class Scheduler extends Component {
 
     return (
       <Container fluid>
+        <button 
+          onClick = {this.clickButton}
+        />
         <Row>
           <Col size="md-6 sm-12">
             <Jumbotron>
