@@ -7,14 +7,14 @@ const dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satur
 class WeekSchedule extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = { //TODO change this from state to database query
             rows: [
                 {
                     time: '9:15',
                     type: 'Section IV',
                     days: [{
                         numGuests: 22,
-                        guides: ['Linc', 'Yook', 'Merry', 'Hunter']
+                        guides: ['Linc', 'Yook', 'Merry', 'Hunter', '']
                     },
                     {
                         numGuests: 12,
@@ -57,46 +57,38 @@ class WeekSchedule extends Component {
     populateDates(week, year) { //returns an array with each date of the given week (e.g. 1-Jul, 2-Jul, 3-Jul, etc.)
         const date = moment(week + ' ' + year, "w-YYYY").format('D-MMM')
         let dateArray = []
-        for (let i = 0; i < 7; i++) {
+        for (let i = 1; i < 8; i++) {
             dateArray.push(moment(date).add(i, 'day').format('D-MMM'))
         }
-        return dateArray //TODO ensure these are the proper dates (week starts on sunday vs monday)
+        return dateArray 
     }
 
-//     handleChange(event, id) => {
-        
-//         this.setState(state => {
-//             const rows = this.state.rows.map(row => {
+    render() {
+        return (
+            <table>
+                <tbody>
+                    <tr>
+                        <th></th>
+                        {dayArray.map(day => <th>{day}</th>)}
+                    </tr>
+                    <tr>
+                        <th></th>
+                        {this.populateDates(this.props.week, this.props.year).map(date => <th>{date}</th>)}
+                    </tr>
+                    {this.state.rows.map(row => {
+                        return (
+                            <Row
+                                row={row}
+                            />
+                        )
+                    })}
+                    <tr>
 
-//             })
-//         })
-// }
-
-
-render() {
-    return (
-        <table>
-            <tr>
-                <th></th>
-                {dayArray.map(day => <th>{day}</th>)}
-            </tr>
-            <tr>
-                <th></th>
-                {this.populateDates(this.props.week, this.props.year).map(date => <th>{date}</th>)}
-            </tr>
-            {this.state.rows.map(row => {
-                return (
-                    <Row
-                        row={row}
-                    />
-                )
-            })}
-            <tr>
-
-            </tr>
-        </table >
-    )
-}
+                    </tr>
+                </tbody>
+            </table >
+        )
+    }
 
 }
 

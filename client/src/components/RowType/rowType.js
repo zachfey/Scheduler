@@ -12,8 +12,7 @@ class RowType extends Component {
     }
 
     handleChange(event) {
-        const name = event.target.name
-        const value = event.target.value
+        const {name, value} = event.target
         this.setState({[name]: value})
     }
 
