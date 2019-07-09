@@ -32,9 +32,11 @@ class Scheduler extends Component {
   }
 
   handleClick = (type, value) => {
+
     switch (type) {
       case 'year':
-        if (value == this.state.selectedYear) {
+        if (value === parseInt(this.state.selectedYear)) {
+
           this.setState({
             selectedYear: null,
             selectedMonth: null,
@@ -49,8 +51,8 @@ class Scheduler extends Component {
         }
         break;
 
-      case 'month': //TODO: Why won't month collapse when selected month state is set to null
-        if (value == this.state.selctedMonth) {
+      case 'month': 
+        if (value === parseInt(this.state.selectedMonth)) {
           this.setState({
             selectedMonth: null,
             selectedWeek: null
@@ -61,11 +63,19 @@ class Scheduler extends Component {
             selectedWeek: null
           })
         }
+        console.log(this.state.selectedMonth)
         break;
 
       case 'week':
-        if (value == this.state.selectedWeek) { this.setState({ selectedWeek: null }) }
-        else { this.setState({ selectedWeek: value }) }
+        if (value === parseInt(this.state.selectedWeek)) {
+          this.setState({
+            selectedWeek: null
+          })
+        } else {
+          this.setState({
+            selectedWeek: value
+          })
+        }
         break;
 
       default:
@@ -101,7 +111,7 @@ class Scheduler extends Component {
   //   }
   // }
 
-  // renderWeeks = (month, year) => {
+  // renderWeeks(month, year) {
   //   {
   //     weeks.map(week => {
   //       if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
@@ -147,8 +157,8 @@ class Scheduler extends Component {
                             />
                             {weeks.map(week => {
                               if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
-                                if(week == this.state.selectedWeek){
-                                  return(
+                                if (week == this.state.selectedWeek) {
+                                  return (
                                     <div>
                                       <Weeks
                                         week={week}
@@ -156,13 +166,13 @@ class Scheduler extends Component {
                                         weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
                                         weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
                                       />
-                                      <WeekSchedule 
-                                        week = {week}
-                                        year = {year}
+                                      <WeekSchedule
+                                        week={week}
+                                        year={year}
                                       />
                                     </div>
                                   )
-                                } else{
+                                } else {
                                   return (
                                     <Weeks
                                       week={week}

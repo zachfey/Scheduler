@@ -13,9 +13,7 @@ class RowDetail extends Component {
     }
 
     componentDidMount(){
-        console.log('mounting')
         let newGuides = this.state.guides;
-        console.log(newGuides.slice(-1)[0])
         if(newGuides.slice(-1)[0] !== ''){
             newGuides.push('')
             this.setState({guides: newGuides})
