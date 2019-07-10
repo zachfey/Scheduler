@@ -2,13 +2,14 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getRows: function() {
+  getAll: function() {
     return axios.get("/api/rows");
   },
-  // Gets the book with the given id
-  // getBook: function(id) {
-  //   return axios.get("/api/books/" + id);
-  // },
+  // Gets the schedule based on week and year
+  getBook: function(week, year) {
+    console.log('in API.js')
+    return axios.get("/api/rows/" + year + '/' + week);
+  },
   // // Deletes the book with the given id
   // deleteBook: function(id) {
   //   return axios.delete("/api/books/" + id);

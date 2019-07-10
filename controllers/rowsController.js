@@ -8,13 +8,15 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // },
-  // findById: function(req, res) {
-  //   db.Book
-  //     .findById(req.params.id)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
+
+  findByDate: function(req, res) {
+    const {week, year} = req.params
+    db.Row
+      .findOne({week: week, year: year})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
   create: function(req, res) {
     db.Row
       .create(req.body)

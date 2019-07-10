@@ -31,13 +31,26 @@ class Scheduler extends Component {
     selectedWeek: moment().format('W'),
   }
 
-  clickButton(){
-      API.getRows()
-        .then(res =>
-          console.table(res.data))
-        
-        .catch(err => console.log(err));
-    };
+  clickButton() {
+    API.getBook(28, 2019)
+      .then(res => {
+        console.table(res.data)
+      })
+      .catch(err => console.log(err))
+    // API.getAll()
+    //   .then(res =>
+    //     console.table(res.data))
+
+    //   .catch(err => console.log(err));
+  };
+
+  pullSchedule = (week, year) => {
+    API.getBook(28, 2019)
+      .then(res => {
+        console.table(res.data)
+      })
+      .catch(err => console.log(err))
+  }
 
 
   handleClick = (type, value) => {
@@ -60,7 +73,7 @@ class Scheduler extends Component {
         }
         break;
 
-      case 'month': 
+      case 'month':
         if (value === parseInt(this.state.selectedMonth)) {
           this.setState({
             selectedMonth: null,
@@ -141,8 +154,8 @@ class Scheduler extends Component {
 
     return (
       <Container fluid>
-        <button 
-          onClick = {this.clickButton}
+        <button
+          onClick={this.clickButton}
         />
         <Row>
           <Col size="md-6 sm-12">
