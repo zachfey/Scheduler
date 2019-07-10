@@ -12,37 +12,73 @@ const rowSeed = [
   {
     week: 28,
     year: 2019,
-    time: '11:45',
-    type: 'Section IV',
-    days: [{
-      numGuests: 22,
-      guides: ['Linc', 'Yook', 'Merry', 'Hunter', '']
+    rows: [{
+      time: '11:45',
+      type: 'Section IV',
+      days: [{
+        numGuests: 22,
+        guides: ['Linc', 'Yook', 'Merry', 'Hunter', '']
+      },
+      {
+        numGuests: 12,
+        guides: ['Sarah', 'Geoff P']
+      },
+      {
+        numGuests: null,
+        guides: ['John']
+      },
+      {
+        numGuests: 13,
+        guides: []
+      },
+      {
+        numGuests: 14,
+        guides: ['Dusty']
+      },
+      {
+        numGuests: 15,
+        guides: []
+      },
+      {
+        numGuests: 16,
+        guides: []
+      }
+      ]
     },
     {
-      numGuests: 12,
-      guides: ['Sarah', 'Geoff P']
-    },
-    {
-      numGuests: null,
-      guides: ['John']
-    },
-    {
-      numGuests: 13,
-      guides: []
-    },
-    {
-      numGuests: 14,
-      guides: ['Dusty']
-    },
-    {
-      numGuests: 15,
-      guides: []
-    },
-    {
-      numGuests: 16,
-      guides: []
-    }
-    ]
+      time: '12:30',
+      type: 'Middle',
+      days: [{
+        numGuests: 45,
+        guides: ['Zach', 'Adam', '$Mike', 'Butters', '']
+      },
+      {
+        numGuests: 12,
+        guides: ['Tardy', 'Dylan']
+      },
+      {
+        numGuests: null,
+        guides: ['Prom']
+      },
+      {
+        numGuests: 25,
+        guides: ['Dusty', 'Kerrie', 'Sam']
+      },
+      {
+        numGuests: 14,
+        guides: ['Brent']
+      },
+      {
+        numGuests: 40,
+        guides: ['Zach', 'Dusty', 'Adam', 'Nick']
+      },
+      {
+        numGuests: 16,
+        guides: []
+      }
+      ]
+    }]
+
   }
 ];
 

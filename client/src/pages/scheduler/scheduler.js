@@ -200,8 +200,7 @@ class Scheduler extends Component {
                                         weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
                                       />
                                       <WeekSchedule
-                                        week={week}
-                                        year={year}
+                                        rows = {this.state.rows}
                                       />
                                     </div>
                                   )
