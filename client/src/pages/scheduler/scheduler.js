@@ -24,14 +24,15 @@ const weekOfYear = (month, year) => parseInt(moment(month + ' ' + year, "M-YYYY"
 
 
 class Scheduler extends Component {
-  // Setting the initial state
+  // Setting the initial state - the mneu will open to the current week
   state = {
     selectedYear: moment().format('YYYY'),
     selectedMonth: moment().format('M'),
     selectedWeek: moment().format('W'),
+    rows: []
   }
 
-  clickButton() {
+  clickButton() { //test button at the top of the page
     API.getBook(28, 2019)
       .then(res => {
         console.table(res.data)
@@ -44,21 +45,22 @@ class Scheduler extends Component {
     //   .catch(err => console.log(err));
   };
 
-  pullSchedule = (week, year) => {
-    API.getBook(28, 2019)
+  //pullSchedule is used when a week is clicked on. It pulls that week's schedule from Mongo and returns via callback
+  pullSchedule = (week, year, callback) => {
+    API.getBook(week, year)
       .then(res => {
-        console.table(res.data)
+        return callback(res.data)
       })
       .catch(err => console.log(err))
   }
 
-
+  //handles clicks on year, month, or weeks
   handleClick = (type, value) => {
 
     switch (type) {
       case 'year':
         if (value === parseInt(this.state.selectedYear)) {
-
+          // sets state to nulll to collapse menu
           this.setState({
             selectedYear: null,
             selectedMonth: null,
@@ -85,7 +87,6 @@ class Scheduler extends Component {
             selectedWeek: null
           })
         }
-        console.log(this.state.selectedMonth)
         break;
 
       case 'week':
@@ -94,9 +95,16 @@ class Scheduler extends Component {
             selectedWeek: null
           })
         } else {
-          this.setState({
-            selectedWeek: value
+          //pull that week's schedule then sets state
+          this.pullSchedule(value, this.state.selectedYear, res => {
+            this.setState({
+              selectedWeek: value,
+              rows: res,
+            },
+              ()  => {console.table(this.state.rows)}
+            )
           })
+
         }
         break;
 

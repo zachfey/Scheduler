@@ -7,7 +7,6 @@ export default {
   },
   // Gets the schedule based on week and year
   getBook: function(week, year) {
-    console.log('in API.js')
     return axios.get("/api/rows/" + year + '/' + week);
   },
   // // Deletes the book with the given id
