@@ -29,7 +29,7 @@ class Scheduler extends Component {
     selectedYear: moment().format('YYYY'),
     selectedMonth: moment().format('M'),
     selectedWeek: moment().format('W'),
-    rows: []
+    week: null
   }
 
   clickButton() { //test button at the top of the page
@@ -44,6 +44,21 @@ class Scheduler extends Component {
 
     //   .catch(err => console.log(err));
   };
+
+  componentDidMount() {
+    this.updateWeekSchedule(this.state.selectedWeek, this.state.selectedYear)
+  }
+
+  //pull that week's schedule then sets state
+  updateWeekSchedule = (week, year) => {
+    this.pullSchedule(week, year, res => {
+      this.setState({
+        week: res,
+      },
+        ()  => {console.table(this.state.week)}
+      )
+    })
+  }
 
   //pullSchedule is used when a week is clicked on. It pulls that week's schedule from Mongo and returns via callback
   pullSchedule = (week, year, callback) => {
@@ -95,15 +110,11 @@ class Scheduler extends Component {
             selectedWeek: null
           })
         } else {
-          //pull that week's schedule then sets state
-          this.pullSchedule(value, this.state.selectedYear, res => {
-            this.setState({
-              selectedWeek: value,
-              rows: res,
-            },
-              ()  => {console.table(this.state.rows)}
-            )
+          this.setState({
+            selectedWeek: value
           })
+          this.updateWeekSchedule(value, this.state.selectedYear)
+
 
         }
         break;
@@ -113,50 +124,91 @@ class Scheduler extends Component {
     }
   }
 
-  // renderMonths = (year) => {
+  renderYears = () => {
+    return years.map(year => {
+      if (year == this.state.selectedYear) {
+        return (
+          <div>
+            <Year
+              year={year}
+              handleClick={this.handleClick}
+            />
+            {/* {this.renderMonths(year)} */} {/*The render months function is typed out below*/}
+            {this.renderMonths(year)}
+          </div>
+        )
+      }
+      return (
+        <Year
+          year={year}
+          handleClick={this.handleClick}
+        />
+      )
+    })
+  }
 
-  //   {
-  //     months.map(month => {
-  //       if (month == this.state.selectedMonth) {
-  //         return (
-  //           <div>
-  //             <Months
-  //               month={month}
-  //               handleClick={this.handleClick}
-  //               monthNames={monthNames}
-  //             />
-  //             {this.renderWeeks(month, year)}
-  //           </div>
-  //         )
-  //       } else {
-  //         return (
-  //           <Months
-  //             month={month}
-  //             handleClick={this.handleClick}
-  //             monthNames={monthNames}
-  //           />
-  //         )
-  //       }
-  //     })
-  //   }
-  // }
+  renderMonths = year => {
+    return months.map(month => {
+      if (month == this.state.selectedMonth) {
+        return (
+          <div>
+            <Months
+              month={month}
+              handleClick={this.handleClick}
+              monthNames={monthNames}
+            />
+            {this.renderWeeks(month, year)}
+          </div>
+        )
+      } else {
+        return (
+          <Months
+            month={month}
+            handleClick={this.handleClick}
+            monthNames={monthNames}
+          />
+        )
+      }
+    })
+    
+  }
 
-  // renderWeeks(month, year) {
-  //   {
-  //     weeks.map(week => {
-  //       if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
-  //         return (
-  //           <Weeks
-  //             week={week}
-  //             handleClick={this.handleClick}
-  //             weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
-  //             weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
-  //           />
-  //         )
-  //       }
-  //     })
-  //   }
-  // }
+  renderWeeks(month, year) {
+    return weeks.map(week => {
+      if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
+        if (week == this.state.selectedWeek) {
+          return (
+            <div>
+              <Weeks
+                week={week}
+                handleClick={this.handleClick}
+                weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
+                weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
+              />
+              {(this.state.week && this.state.week.week === week) ? 
+              <WeekSchedule
+                week = {this.state.week}
+              />
+              :
+              'Loading' //TODO add a timeout to the 'loading'
+            }
+              
+            </div>
+          )
+        } else {
+          return (
+            <Weeks
+              week={week}
+              handleClick={this.handleClick}
+              weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
+              weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
+            />
+          )
+        }
+      }
+    })
+
+  }
 
   render() {
 
@@ -167,77 +219,7 @@ class Scheduler extends Component {
         />
         <Row>
           <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Today's Date</h1>
-            </Jumbotron>
-            {years.map(year => {
-              if (year == this.state.selectedYear) {
-                return (
-                  <div>
-                    <Year
-                      year={year}
-                      handleClick={this.handleClick}
-                    />
-                    {/* {this.renderMonths(year)} */} {/*The render months function is typed out below*/}
-                    {months.map(month => {
-                      if (month == this.state.selectedMonth) {
-                        return (
-                          <div>
-                            <Months
-                              month={month}
-                              handleClick={this.handleClick}
-                              monthNames={monthNames}
-                            />
-                            {weeks.map(week => {
-                              if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
-                                if (week == this.state.selectedWeek) {
-                                  return (
-                                    <div>
-                                      <Weeks
-                                        week={week}
-                                        handleClick={this.handleClick}
-                                        weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
-                                        weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
-                                      />
-                                      <WeekSchedule
-                                        rows = {this.state.rows}
-                                      />
-                                    </div>
-                                  )
-                                } else {
-                                  return (
-                                    <Weeks
-                                      week={week}
-                                      handleClick={this.handleClick}
-                                      weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
-                                      weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
-                                    />
-                                  )
-                                }
-                              }
-                            })}
-                          </div>
-                        )
-                      } else {
-                        return (
-                          <Months
-                            month={month}
-                            handleClick={this.handleClick}
-                            monthNames={monthNames}
-                          />
-                        )
-                      }
-                    })}
-                  </div>
-                )
-              }
-              return (
-                <Year
-                  year={year}
-                  handleClick={this.handleClick}
-                />
-              )
-            })}
+            {this.renderYears()}
           </Col>
         </Row>
       </Container>

@@ -8,47 +8,52 @@ class WeekSchedule extends Component {
     constructor(props) {
         super(props);
         this.state = { //TODO change this from state to database query
-            rows: this.props.rows
-            // rows: [
-            //     {
-            //         time: '9:15',
-            //         type: 'Section IV',
-            //         days: [{
-            //             numGuests: 22,
-            //             guides: ['Linc', 'Yook', 'Merry', 'Hunter', '']
+            week: this.props.week || {}
+            // week: {
+            //     week: 28,
+            //     year: 2019,
+            //     rows: [
+            //         {
+            //             time: '9:15',
+            //             type: 'Section IV',
+            //             days: [{
+            //                 numGuests: 22,
+            //                 guides: ['Linc', 'Yook', 'Merry', 'Hunter', '']
+            //             },
+            //             {
+            //                 numGuests: 12,
+            //                 guides: ['Sarah', 'Geoff P']
+            //             },
+            //             {
+            //                 numGuests: null,
+            //                 guides: []
+            //             },
+            //             {
+            //                 numGuests: 13,
+            //                 guides: []
+            //             },
+            //             {
+            //                 numGuests: 14,
+            //                 guides: []
+            //             },
+            //             {
+            //                 numGuests: 15,
+            //                 guides: []
+            //             },
+            //             {
+            //                 numGuests: 16,
+            //                 guides: []
+            //             }
+            //             ]
             //         },
             //         {
-            //             numGuests: 12,
-            //             guides: ['Sarah', 'Geoff P']
-            //         },
-            //         {
-            //             numGuests: null,
-            //             guides: []
-            //         },
-            //         {
-            //             numGuests: 13,
-            //             guides: []
-            //         },
-            //         {
-            //             numGuests: 14,
-            //             guides: []
-            //         },
-            //         {
-            //             numGuests: 15,
-            //             guides: []
-            //         },
-            //         {
-            //             numGuests: 16,
-            //             guides: []
+            //             time: '11:30',
+            //             type: 'Section III',
+            //             days: []
             //         }
-            //         ]
-            //     },
-            //     {
-            //         time: '11:30',
-            //         type: 'Section III',
-            //         days: []
-            //     }
-            // ]
+            //     ]
+            // }
+            
         }
 
         // this.handleChange = this.handleChange.bind(this)
@@ -65,7 +70,7 @@ class WeekSchedule extends Component {
     }
 
     render() {
-        console.log(this.state.rows)
+        // console.log(this.state.week.rows)
         return (
             <table>
                 <tbody>
@@ -75,15 +80,15 @@ class WeekSchedule extends Component {
                     </tr>
                     <tr>
                         <th></th>
-                        {this.populateDates(this.state.rows.week, this.state.rows.year).map(date => <th>{date}</th>)}
+                        {this.populateDates(this.state.week.week, this.state.week.year).map(date => <th>{date}</th>)}
                     </tr>
-                    {/* {this.state.rows.map(row => {
+                    {this.state.week.rows.map(row => {
                         return (
                             <Row
                                 row={row}
                             />
                         )
-                    })} */}
+                    })}
                     <tr>
 
                     </tr>
