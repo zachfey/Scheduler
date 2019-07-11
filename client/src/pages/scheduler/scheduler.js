@@ -114,8 +114,6 @@ class Scheduler extends Component {
             selectedWeek: value
           })
           this.updateWeekSchedule(value, this.state.selectedYear)
-
-
         }
         break;
 

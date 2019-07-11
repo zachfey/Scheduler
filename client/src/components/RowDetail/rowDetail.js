@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../table.css';
 
 class RowDetail extends Component {
     constructor(props) {

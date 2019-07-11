@@ -1,12 +1,13 @@
 import React from "react";
 import RowType from '../RowType';
 import RowDetail from '../RowDetail';
+import '../table.css';
 
 
 
 function Row(props) {
     return (
-        <tr>
+        <tr className = 'mainRow'>
             <RowType
                 time={props.row.time}
                 type={props.row.type}
