@@ -1,0 +1,3 @@
+# Scheduler
+
+npm run seed
