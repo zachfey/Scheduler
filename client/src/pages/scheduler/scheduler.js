@@ -33,7 +33,7 @@ class Scheduler extends Component {
   }
 
   clickButton() { //test button at the top of the page
-    API.getBook(28, 2019)
+    API.getWeek(28, 2019)
       .then(res => {
         console.table(res.data)
       })
@@ -46,11 +46,12 @@ class Scheduler extends Component {
   };
 
   componentDidMount() {
-    this.updateWeekSchedule(this.state.selectedWeek, this.state.selectedYear)
+    this.findWeekSchedule(this.state.selectedWeek, this.state.selectedYear)
   }
 
+
   //pull that week's schedule then sets state
-  updateWeekSchedule = (week, year) => {
+  findWeekSchedule = (week, year) => {
     this.pullSchedule(week, year, res => {
       this.setState({
         week: res,
@@ -62,7 +63,7 @@ class Scheduler extends Component {
 
   //pullSchedule is used when a week is clicked on. It pulls that week's schedule from Mongo and returns via callback
   pullSchedule = (week, year, callback) => {
-    API.getBook(week, year)
+    API.getWeek(week, year)
       .then(res => {
         return callback(res.data)
       })
@@ -113,7 +114,7 @@ class Scheduler extends Component {
           this.setState({
             selectedWeek: value
           })
-          this.updateWeekSchedule(value, this.state.selectedYear)
+          this.findeWeekSchedule(value, this.state.selectedYear)
         }
         break;
 

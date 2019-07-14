@@ -23,12 +23,17 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // update: function(req, res) {
-  //   db.Book
-  //     .findOneAndUpdate({ _id: req.params.id }, req.body)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
+  updateWeek: function(req, res) {
+    // console.log('inside rowcontroller updateweek')
+    // console.log(req.body.rows)
+    db.Row
+      .findOneAndUpdate({ 
+        _id: req.body._id
+      }, req.body)
+      .then(dbModel => res.json(dbModel))
+      // .then(dbModel => console.log(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   // remove: function(req, res) {
   //   db.Book
   //     .findById({ _id: req.params.id })

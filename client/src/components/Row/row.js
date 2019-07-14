@@ -1,27 +1,43 @@
-import React from "react";
+import React, { Component } from "react";
 import RowType from '../RowType';
 import RowDetail from '../RowDetail';
 import '../table.css';
 
 
+class Row extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            row: this.props.row || {}
+        }
+        // this.handleChange = this.handleChange.bind(this);
+    }
 
-function Row(props) {
-    return (
-        <tr className = 'mainRow'>
-            <RowType
-                time={props.row.time}
-                type={props.row.type}
-            />
-            {props.row.days.map(day => {
-                return (
-                    <RowDetail
-                        numGuests={day.numGuests}
-                        guides={day.guides}
-                    />
-                )
-            })}
-        </tr>
-    )
+    render() {
+        return (
+            <tr className='mainRow'>
+                <RowType
+                    key = {this.state.row}
+                    time={this.state.row.time}
+                    type={this.state.row.type}
+                    rowIndex = {this.props.rowIndex}
+                    saveChanges = {this.props.saveChanges}
+                />
+                {this.state.row.days.map((day, index) => {
+                    return (
+                        <RowDetail
+                            key={day}
+                            rowIndex = {this.props.rowIndex}
+                            dayIndex={index}
+                            numGuests={day.numGuests}
+                            guides={day.guides}
+                            saveChanges = {this.props.saveChanges}
+                        />
+                    )
+                })}
+            </tr>
+        )
+    }
 }
 
 export default Row;
