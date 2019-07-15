@@ -26,23 +26,27 @@ class WeekSchedule extends Component {
         return dateArray
     }
 
-    saveChanges(rowIndex, state, dayIndex) {
+    saveChanges(state, cb) {
         // console.log('inside savechanges in weekschedule')
         let newSched = this.state.weekSchedule;
         // console.log(state)
+        const rowIndex = state.rowIndex;
+        // console.log(rowIndex)
+        // console.log(newSched.rows)
         switch(state.category){
             case 'type':
-                const {category, time, type} = state;
+                const {time, type} = state;
                 newSched.rows[rowIndex].time = time;
                 newSched.rows[rowIndex].type = type;
-                API.updateWeek(newSched);
+                API.updateWeek(newSched, res => cb());
                 break;
 
             case 'detail':
-                const {cat, numGuests, guides} = state;
+                const {dayIndex, numGuests, guides} = state;
                 newSched.rows[rowIndex].days[dayIndex].numGuests = numGuests;
                 newSched.rows[rowIndex].days[dayIndex].guides = guides;
-                API.updateWeek(newSched);
+                API.updateWeek(newSched, res => cb());
+                cb();
                 break;
             }
         // // const {name, value} = event.target

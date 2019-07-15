@@ -3,17 +3,23 @@ import axios from "axios";
 export default {
   // Gets all books
   getAll: function() {
-    return axios.get("/api/rows");
+    return axios.get("/api/rows")
+      .catch(err => console.log(err))
   },
   // Gets the schedule based on week and year
   getWeek: function(week, year) {
-    return axios.get("/api/rows/" + year + '/' + week);
+    return axios.get("/api/rows/" + year + '/' + week)
+      .catch(err => console.log(err))
   },
 
-  updateWeek: function(weekSched){
+  updateWeek: function(weekSched, cb){
     // console.log('inside API updateWeek')
     // console.table(weekSched)
     return axios.put("/api/rows/update", weekSched)
+      .then(res => {
+        cb(res);
+      })
+      .catch(err => console.log(err))
   }
   // // Deletes the book with the given id
   // deleteBook: function(id) {

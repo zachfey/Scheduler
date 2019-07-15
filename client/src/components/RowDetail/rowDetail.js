@@ -6,8 +6,11 @@ class RowDetail extends Component {
         super(props);
         this.state = {
             category: 'detail',
+            rowIndex: props.rowIndex,
+            dayIndex: props.dayIndex,
             numGuests: props.numGuests,
-            guides: props.guides
+            guides: props.guides,
+            edited: false
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -25,7 +28,7 @@ class RowDetail extends Component {
 
     handleChange(event) {
         const { name, value } = event.target;
-        this.setState({ [name]: value })
+        this.setState({ [name]: value, edited: true })
     }
 
     handleArrayChange(event) { //TODO add ability to add row
@@ -35,7 +38,7 @@ class RowDetail extends Component {
             return (i === index ? value : guide)
         });
         // this.props.onArrayChange(this.props.id, 'guides', newGuides)
-        this.setState({ guides: newGuides })
+        this.setState({ guides: newGuides, edited: true  })
     }
 
     // handleChange(event) {
@@ -54,14 +57,16 @@ class RowDetail extends Component {
     // }
 
     saveChanges() {
-        this.props.saveChanges(this.props.rowIndex, this.state, this.props.dayIndex)
+        if(this.state.edited){
+            this.props.saveChanges(this.state, () => this.setState({edited:false}))
+        }
     }
 
     render() {
         const numGuests = this.state.numGuests
         const guides = this.state.guides
         return (
-            < td >
+            < td  className = {this.state.edited ? 'edited' : 'original'}>
                 <input
                     value={numGuests}
                     name="numGuests"
