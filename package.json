@@ -1,7 +1,7 @@
 {
   "name": "mern",
   "version": "1.0.0",
-  "description": "npm run seed",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -13,10 +13,9 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "author": "Zach Fey",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@auth0/auth0-spa-js": "^1.0.2",
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.7"
   },
@@ -27,15 +26,6 @@
     "if-env": "^1.0.4",
     "moment": "^2.24.0",
     "mongoose": "^5.3.16",
-    "react-bootstrap": "^1.0.0-beta.9",
-    "react-router-dom": "^5.0.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zachfey/Scheduler.git"
-  },
-  "bugs": {
-    "url": "https://github.com/zachfey/Scheduler/issues"
-  },
-  "homepage": "https://github.com/zachfey/Scheduler#readme"
+    "react-bootstrap": "^1.0.0-beta.9"
+  }
 }
