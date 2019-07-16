@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Jumbotron from "../../components/Jumbotron";
+// import Jumbotron from "../../components/Jumbotron";
 // import DeleteBtn from "../../components/DeleteBtn";
 import Year from "../../components/Year";
 import Months from '../../components/Months';
@@ -72,7 +72,6 @@ class Scheduler extends Component {
 
   //handles clicks on year, month, or weeks
   handleClick = (type, value) => {
-
     switch (type) {
       case 'year':
         if (value === parseInt(this.state.selectedYear)) {
@@ -114,7 +113,7 @@ class Scheduler extends Component {
           this.setState({
             selectedWeek: value
           })
-          this.findeWeekSchedule(value, this.state.selectedYear)
+          this.findWeekSchedule(value, this.state.selectedYear)
         }
         break;
 
@@ -125,7 +124,7 @@ class Scheduler extends Component {
 
   renderYears = () => {
     return years.map(year => {
-      if (year == this.state.selectedYear) {
+      if (year === parseInt(this.state.selectedYear)) {
         return (
           <div>
             <Year
@@ -148,7 +147,7 @@ class Scheduler extends Component {
 
   renderMonths = year => {
     return months.map(month => {
-      if (month == this.state.selectedMonth) {
+      if (month === parseInt(this.state.selectedMonth)) {
         return (
           <div>
             <Months
@@ -175,7 +174,9 @@ class Scheduler extends Component {
   renderWeeks(month, year) {
     return weeks.map(week => {
       if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
-        if (week == this.state.selectedWeek) {
+        if (week === parseInt(this.state.selectedWeek)) {
+          console.log('this.state: '+ this.state)
+          // console.log('this.state.week.week: ' + this.state.week.week)
           return (
             <div>
               <Weeks
@@ -210,7 +211,7 @@ class Scheduler extends Component {
   }
 
   render() {
-
+    console.log(this.state)
     return (
       <Container fluid>
         <button

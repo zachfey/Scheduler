@@ -1,3 +1,4 @@
 module.exports = {
-  Row: require("./row")
+  Row: require("./row"),
+  User: require('./user')
 };

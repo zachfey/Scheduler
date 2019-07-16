@@ -3,6 +3,7 @@ const db = require("../models");
 // Defining methods for the rowsController
 module.exports = {
   findAll: function(req, res) {
+    console.log('finding')
     db.Row
       .find(req.query)
       .then(dbModel => res.json(dbModel))
