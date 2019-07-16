@@ -19,10 +19,20 @@ class RowDetail extends Component {
     }
 
     componentDidMount() {
+
+    }
+    
+    componentDidUpdate(){
         let newGuides = this.state.guides;
         if (newGuides.slice(-1)[0] !== '') {
             newGuides.push('')
             this.setState({ guides: newGuides })
+        } else { //if the last spot is empty
+            if (newGuides.slice(-2)[0] === ''){ //check if the second to last spot is empty
+                console.log('second to last empty', newGuides.slice(-2)[0])
+                newGuides.pop()
+                this.setState({ guides: newGuides })
+            }
         }
     }
 
