@@ -15,7 +15,7 @@ class Row extends Component {
 
     render() {
         return (
-            <tr className='mainRow'>
+            <tr className='border_bottom'>
                 <RowType
                     key = {this.state.row}
                     time={this.state.row.time}
@@ -35,6 +35,10 @@ class Row extends Component {
                         />
                     )
                 })}
+                <td>
+                    <button className = 'deleteRow'>Delete Row</button>
+                    <button className = 'addRow'>Add Row</button>
+                </td>
             </tr>
         )
     }

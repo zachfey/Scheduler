@@ -11,3 +11,36 @@ th, td {
   .edited{
     background-color:red;
   }
+
+  /* .addRow{
+    border: none;
+    height: 1px;
+    padding: 1px;
+    background-color: red;
+    width: 100%;
+    margin: 0px;
+  }
+
+  .addRow:hover{
+    border: 2px;
+    height: 1px;
+    border-color: green;
+    background-color: green;
+  }
+
+  .addRowTD{
+    height: 20px !important;
+    padding: 0px !important;
+    border: none !important;
+
+  } */
+/* tr.border_bottom:hover td:hover{
+  border-bottom: 1pt solid green;
+}
+
+  .mainRow:hover{ 
+    /* outline: thick solid; */
+    /* border-width: 2px, 4px, 8px, 16px !important;
+    border-bottom-width: 3px !important;
+    border-bottom-color: green!important;
+  } */

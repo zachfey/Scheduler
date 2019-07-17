@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Row from '../Row';
 import { Table } from 'react-bootstrap';
 import API from '../../utils/API'
+import '../table.css';
 const moment = require('moment')
 
 const dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -16,6 +17,9 @@ class WeekSchedule extends Component {
         this.saveChanges = this.saveChanges.bind(this);
     }
 
+    componentDidUpdate() {
+
+    }
 
     populateDates(week, year) { //returns an array with each date of the given week (e.g. 1-Jul, 2-Jul, 3-Jul, etc.)
         const date = moment(week + ' ' + year, "w-YYYY").format('D-MMM')
@@ -33,61 +37,23 @@ class WeekSchedule extends Component {
         const rowIndex = state.rowIndex;
         // console.log(rowIndex)
         // console.log(newSched.rows)
-        switch(state.category){
+        switch (state.category) {
             case 'type':
-                const {time, type} = state;
+                const { time, type } = state;
                 newSched.rows[rowIndex].time = time;
                 newSched.rows[rowIndex].type = type;
                 API.updateWeek(newSched, res => cb());
                 break;
 
             case 'detail':
-                const {dayIndex, numGuests, guides} = state;
+                const { dayIndex, numGuests, guides } = state;
                 newSched.rows[rowIndex].days[dayIndex].numGuests = numGuests;
                 newSched.rows[rowIndex].days[dayIndex].guides = guides;
                 API.updateWeek(newSched, res => cb());
                 cb();
                 break;
-            }
-        // // const {name, value} = event.target
-        // let newWeekSched = this.state.weekSchedule;
-        // const row = newWeekSched.rows[rowIndex];
-        // switch (category) {
-        //     case 'type':
-        //         switch (name) {
-        //             case 'time':
-        //                 console.log('current time: ' + row.time)
-        //                 console.log('new time: ' + value)
-        //                 newWeekSched.rows[rowIndex].time = value
-        //                 break;
-        //             case 'type':
-        //                 console.log('current type: ' + row.type)
-        //                 console.log('new type: ' + value)
-        //                 newWeekSched.rows[rowIndex].type = value
-        //         }
-        //         break;
-        //     case 'detail':
-        //         if(dayIndex) {
-        //             console.log('dayindex exists!')
-        //             console.log('current numGuests: ' + row.days[dayIndex].numGuests)
-        //             console.log('new numGuests: ' + value)
-        //             newWeekSched.rows[rowIndex].days[dayIndex].numGuests = value
-        //         }
-        //         break;
-
-        // }
-        // console.log(this.state.row[])
-        // this.setState({ [id]: value })
+        }
     }
-
-    // handleArrayChange(id, name, value) { //TODO add ability to add row
-    //     // const {name, value} = event.target
-    //     // const index = parseInt(name)
-    //     // const newGuides = this.state.guides.map((guide, i) => {
-    //     //     return(i === index ? value : guide)
-    //     // });
-    //     this.setState({ [id]: value })
-    // }
 
     render() {
         // console.log(this.state.week.rows)
@@ -111,7 +77,7 @@ class WeekSchedule extends Component {
                                 key={row}
                                 rowIndex={index}
                                 row={row}
-                                saveChanges = {this.saveChanges}
+                                saveChanges={this.saveChanges}
                             />
                         )
                     })}
