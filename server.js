@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const routes = require("./routes");
 const session = require('express-session')
 const passport = require('./passport');
+const MongoStore = require('connect-mongo')(session)
+// const dbConnection = require('./models')
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -15,6 +17,7 @@ app.use(express.json());
 app.use(
   session({
     secret: 'a-tan-spoon', //randomly selected string to secure hash
+    store: new MongoStore({mongooseConnection: mongoose.connection}),
     resave: false,
     saveUninitialized: false
   })
@@ -31,13 +34,12 @@ app.use(passport.session()) //calls serializeUser and deserializeUser
 // Add routes, both API and view
 app.use(routes);
 
-
-
 // Connect to the Mongo DB
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/scheduler",
   {useNewUrlParser: true}
 );
+
 
 // Start the API server
 app.listen(PORT, function() {
