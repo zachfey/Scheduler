@@ -25,9 +25,26 @@ module.exports = {
 
   loginSuccess: (req, res) => {
     console.log('logged in', req.user);
-      var userInfo = {
-          username: req.user.username
-      };
-      res.send(userInfo);
+    var userInfo = {
+      username: req.user.username
+    };
+    res.send(userInfo);
+  },
+
+  checkUser: (req, res) => {
+    console.log('checking user')
+    req.user ?
+      res.json({ user: req.user })
+      : res.json({ user: null })
+  },
+
+  logOut: (req, res) => {
+    if (req.user) {
+      req.logout()
+      console.log('logging out')
+      res.send({ msg: 'logging out' })
+    } else {
+      res.send({ msg: 'no user to log out' })
+    }
   }
 };

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as sessionActions from '../../utils/session';
 
 class SignUp extends Component {
   constructor() {
@@ -8,7 +11,7 @@ class SignUp extends Component {
     this.state = {
       username: '',
       password: '',
-      redirect: false
+
     }
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,10 +41,10 @@ class SignUp extends Component {
       .then(res => {
         console.log(res)
         if (res.status === 200) {
-        console.log(this.props)
+          console.log(this.props)
           console.log('login success!')
-        //   console.log(res.data)
-        //   console.log('redirecting')
+          //   console.log(res.data)
+          //   console.log('redirecting')
           this.props.logIn(res.data.username)
           this.props.history.push('/')
         }
@@ -77,5 +80,11 @@ class SignUp extends Component {
     );
   }
 }
+
+const mapDispatch = (dispatch) => {
+  return {
+    actions: bindActionCreators(sessionActions, dispatch)
+  };
+};
 
 export default SignUp;

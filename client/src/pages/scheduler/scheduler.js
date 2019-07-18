@@ -7,6 +7,7 @@ import Weeks from '../../components/Weeks';
 import WeekSchedule from '../../components/WeekSchedule'
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
+import Axios from "axios";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 const moment = require('moment')
@@ -25,24 +26,19 @@ const weekOfYear = (month, year) => parseInt(moment(month + ' ' + year, "M-YYYY"
 
 class Scheduler extends Component {
   // Setting the initial state - the mneu will open to the current week
-  state = {
+  constructor() {
+    super();
+  this.state = {
     selectedYear: moment().format('YYYY'),
     selectedMonth: moment().format('M'),
     selectedWeek: moment().format('W'),
     week: null
   }
+this.clickButton = this.clickButton.bind(this)
+}
 
   clickButton() { //test button at the top of the page
-    API.getWeek(28, 2019)
-      .then(res => {
-        console.table(res.data)
-      })
-      .catch(err => console.log(err))
-    // API.getAll()
-    //   .then(res =>
-    //     console.table(res.data))
 
-    //   .catch(err => console.log(err));
   };
 
   componentDidMount() {
@@ -216,7 +212,7 @@ class Scheduler extends Component {
       <Container fluid>
         <button
           onClick={this.clickButton}
-        />
+        >Log Out </button>
         <Row>
           <Col size="md-6 sm-12">
             {this.renderYears()}

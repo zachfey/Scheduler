@@ -20,13 +20,21 @@ export default {
         cb(res);
       })
       .catch(err => console.log(err))
+  },
+
+  login: function(user){
+    const response = {
+      token: '1a2b3c4d',
+      data: {
+        email: user.email,
+        firstName: 'test',
+        lastName: 'test'
+      }
+    };
+    return new Promise (resolve => setTimeout(resolve(response), 1000));
+  },
+
+  logout: function(){
+    return new Promise (resolve => setTimeout(resolve, 1000))
   }
-  // // Deletes the book with the given id
-  // deleteBook: function(id) {
-  //   return axios.delete("/api/books/" + id);
-  // },
-  // // Saves a book to the database
-  // saveBook: function(bookData) {
-  //   return axios.post("/api/books", bookData);
-  // }
 };
