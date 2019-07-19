@@ -24,6 +24,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   updateWeek: function(req, res) {
     // console.log('inside rowcontroller updateweek')
     // console.log(req.body.rows)
@@ -31,6 +32,54 @@ module.exports = {
       .findOneAndUpdate({ 
         _id: req.body._id
       }, req.body)
+      .then(dbModel => res.json(dbModel))
+      // .then(dbModel => console.log(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  createWeek: function(req, res) {
+    console.log('req.body', req.body)
+      const emptyWeek = {
+      week: req.body.week,
+      year: req.body.year,
+      rows: [{
+        days: [{
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        }
+        ],
+        time: '',
+        type: ''
+      }]
+    }
+    console.log('inside rowcontroller updateweek')
+    console.log('emptyWeek', emptyWeek)
+    db.Row
+      .create(emptyWeek)
       .then(dbModel => res.json(dbModel))
       // .then(dbModel => console.log(dbModel))
       .catch(err => res.status(422).json(err));

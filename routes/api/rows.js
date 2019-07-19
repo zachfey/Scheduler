@@ -16,5 +16,8 @@ router.route("/:year/:week")
 router.route('/update')
   .put(rowsController.updateWeek)
 
+router.route('/create')
+  .put(rowsController.createWeek)
+
 
 module.exports = router;

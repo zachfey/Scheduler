@@ -31,9 +31,9 @@ class WeekSchedule extends Component {
     }
 
     saveChanges(state, cb) {
-        // console.log('inside savechanges in weekschedule')
+        console.log('inside savechanges in weekschedule')
         let newSched = this.state.weekSchedule;
-        // console.log(state)
+        console.log('changes to save: ', state)
         const rowIndex = state.rowIndex;
         // console.log(rowIndex)
         // console.log(newSched.rows)

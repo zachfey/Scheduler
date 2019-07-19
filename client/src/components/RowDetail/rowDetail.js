@@ -15,22 +15,30 @@ class RowDetail extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleArrayChange = this.handleArrayChange.bind(this);
-        this.saveChanges = this.saveChanges.bind(this)
+        this.saveChanges = this.saveChanges.bind(this);
+        this.addSubtractRows = this.addSubtractRows.bind(this);
+        // this.debounce = this.debounce.bind(this)
     }
 
     componentDidMount() {
 
     }
-    
-    componentDidUpdate(){
+
+    componentDidUpdate() {
+        this.addSubtractRows()
+    }
+
+    addSubtractRows() {
         let newGuides = this.state.guides;
-        if (newGuides.slice(-1)[0] !== '') {
+        if (newGuides.slice(-1)[0] !== '' && newGuides.slice(-2)[0] !== '') {
             newGuides.push('')
+            console.log('addsubtractrows update state top')
             this.setState({ guides: newGuides })
         } else { //if the last spot is empty
-            if (newGuides.slice(-2)[0] === ''){ //check if the second to last spot is empty
+            if (newGuides.slice(-2)[0] === '' && newGuides.length > 1) { //check if the second to last spot is empty
                 console.log('second to last empty', newGuides.slice(-2)[0])
                 newGuides.pop()
+                console.log('addsubtractrows update state')
                 this.setState({ guides: newGuides })
             }
         }
@@ -48,7 +56,7 @@ class RowDetail extends Component {
             return (i === index ? value : guide)
         });
         // this.props.onArrayChange(this.props.id, 'guides', newGuides)
-        this.setState({ guides: newGuides, edited: true  })
+        this.setState({ guides: newGuides, edited: true })
     }
 
     // handleChange(event) {
@@ -67,8 +75,8 @@ class RowDetail extends Component {
     // }
 
     saveChanges() {
-        if(this.state.edited){
-            this.props.saveChanges(this.state, () => this.setState({edited:false}))
+        if (this.state.edited) {
+            this.props.saveChanges(this.state, () => this.setState({ edited: false }))
         }
     }
 
@@ -76,7 +84,7 @@ class RowDetail extends Component {
         const numGuests = this.state.numGuests
         const guides = this.state.guides
         return (
-            < td  className = {this.state.edited ? 'edited' : 'original'}>
+            < td className={this.state.edited ? 'edited' : 'original'}>
                 <input
                     value={numGuests}
                     name="numGuests"

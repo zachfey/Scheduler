@@ -57,46 +57,11 @@ class Scheduler extends Component {
     })
   }
 
-  setEmptySchedule = (week, year) => {
-    return {
-      week: parseInt(week),
-      year: parseInt(year),
-      rows: [{
-        days: [{
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        }
-        ],
-        time: '',
-        type: ''
-      }]
-    }
-    // console.log('empty week', emptyWeek)
-    // this.setState({week: emptyWeek})
+  createEmptySchedule = (week, year) => {
+    API.createWeek(week, year, res => {
+      console.log('new week', res.data)
+      this.findWeekSchedule(week, year);
+    })
   }
 
   //pullSchedule is used when a week is clicked on. It pulls that week's schedule from Mongo and returns via callback
@@ -108,7 +73,7 @@ class Scheduler extends Component {
           :
           // console.log('creating empty schedule')
           callback(
-            this.setEmptySchedule(week, year)
+            this.createEmptySchedule(week, year)
           )
 
 

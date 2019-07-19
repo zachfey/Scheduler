@@ -22,6 +22,14 @@ export default {
       .catch(err => console.log(err))
   },
 
+  createWeek: function(week, year, cb){
+    return axios.put('/api/rows/create', {week: week, year: year})
+      .then(res => {
+        cb(res);
+      })
+      .catch( err => console.log(err))
+  },
+
   login: function(user){
     const response = {
       token: '1a2b3c4d',
