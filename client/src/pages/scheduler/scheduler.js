@@ -28,14 +28,14 @@ class Scheduler extends Component {
   // Setting the initial state - the mneu will open to the current week
   constructor() {
     super();
-  this.state = {
-    selectedYear: moment().format('YYYY'),
-    selectedMonth: moment().format('M'),
-    selectedWeek: moment().format('W'),
-    week: null
+    this.state = {
+      selectedYear: moment().format('YYYY'),
+      selectedMonth: moment().format('M'),
+      selectedWeek: moment().format('W'),
+      week: null
+    }
+    this.clickButton = this.clickButton.bind(this)
   }
-this.clickButton = this.clickButton.bind(this)
-}
 
   clickButton() { //test button at the top of the page
 
@@ -52,16 +52,66 @@ this.clickButton = this.clickButton.bind(this)
       this.setState({
         week: res,
       },
-        ()  => {console.table(this.state.week)}
+        () => { console.table(this.state.week) }
       )
     })
+  }
+
+  setEmptySchedule = (week, year) => {
+    return {
+      week: parseInt(week),
+      year: parseInt(year),
+      rows: [{
+        days: [{
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        },
+        {
+          numGuests: '',
+          guides: ['']
+        }
+        ],
+        time: '',
+        type: ''
+      }]
+    }
+    // console.log('empty week', emptyWeek)
+    // this.setState({week: emptyWeek})
   }
 
   //pullSchedule is used when a week is clicked on. It pulls that week's schedule from Mongo and returns via callback
   pullSchedule = (week, year, callback) => {
     API.getWeek(week, year)
       .then(res => {
-        return callback(res.data)
+        res.data ?
+          callback(res.data)
+          :
+          // console.log('creating empty schedule')
+          callback(
+            this.setEmptySchedule(week, year)
+          )
+
+
       })
       .catch(err => console.log(err))
   }
@@ -164,14 +214,14 @@ this.clickButton = this.clickButton.bind(this)
         )
       }
     })
-    
+
   }
 
   renderWeeks(month, year) {
     return weeks.map(week => {
       if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
         if (week === parseInt(this.state.selectedWeek)) {
-          console.log('this.state: '+ this.state)
+          console.log('this.state: ' + this.state)
           // console.log('this.state.week.week: ' + this.state.week.week)
           return (
             <div>
@@ -181,14 +231,14 @@ this.clickButton = this.clickButton.bind(this)
                 weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
                 weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
               />
-              {(this.state.week && this.state.week.week === week) ? 
-              <WeekSchedule
-                week = {this.state.week}
-              />
-              :
-              'Loading' //TODO add a timeout to the 'loading'
-            }
-              
+              {(this.state.week && this.state.week.week === week) ?
+                <WeekSchedule
+                  week={this.state.week}
+                />
+                :
+                'Loading' //TODO add a timeout to the 'loading'
+              }
+
             </div>
           )
         } else {
