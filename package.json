@@ -1,58 +1,32 @@
+    
 {
-  "name": "mern",
-  "version": "1.0.0",
-  "description": "npm run seed",
-  "main": "server.js",
-  "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
-    "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
-  },
-  "author": "Zach Fey",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^4.1.0",
-    "nodemon": "^1.18.7"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.19",
-    "@fortawesome/free-solid-svg-icons": "^5.9.0",
-    "@fortawesome/react-fontawesome": "^0.1.4",
-    "axios": "^0.18.0",
-    "bcrypt": "^3.0.6",
-    "bcryptjs": "^2.4.3",
-    "bootstrap": "^4.3.1",
-    "connect-mongo": "^3.0.0",
-    "express": "^4.17.1",
-    "express-session": "^1.16.2",
-    "if-env": "^1.0.4",
-    "install-peers": "^1.0.3",
-    "moment": "^2.24.0",
-    "mongoose": "^5.3.16",
-    "morgan": "^1.9.1",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "react": "16.8.6",
-    "react-bootstrap": "^1.0.0-beta.9",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
-    "react-router-dom": "^5.0.1",
-    "redux": "^4.0.4",
-    "redux-react-session": "^2.6.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zachfey/Scheduler.git"
-  },
-  "bugs": {
-    "url": "https://github.com/zachfey/Scheduler/issues"
-  },
-  "prestart": "npm-link-shared ./node_modules/<other package>/node_modules . react",
-  "homepage": "https://github.com/zachfey/Scheduler#readme",
-  "keywords": []
-}
+    "name": "heroku-cra-node",
+    "version": "3.0.0",
+    "description": "How to use create-react-app with a custom Node API on Heroku",
+    "engines": {
+      "node": "10.x"
+    },
+    "scripts": {
+      "start": "node server",
+      "build": "cd react-ui/ && npm install && npm run build"
+    },
+    "cacheDirectories": [
+      "node_modules",
+      "react-ui/node_modules"
+    ],
+    "dependencies": {
+      "express": "^4.16.4"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/mars/heroku-cra-node.git"
+    },
+    "keywords": [
+      "node",
+      "heroku",
+      "create-react-app",
+      "react"
+    ],
+    "license": "MIT",
+    "devDependencies": {}
+  }

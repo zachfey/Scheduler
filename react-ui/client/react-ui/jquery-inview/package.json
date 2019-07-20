@@ -1,0 +1,51 @@
+{
+  "_from": "jquery-inview@^1.1.2",
+  "_id": "jquery-inview@1.1.2",
+  "_inBundle": false,
+  "_integrity": "sha1-a3z29MmrC2Q14EMJLhnvYmAGYsg=",
+  "_location": "/jquery-inview",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "jquery-inview@^1.1.2",
+    "name": "jquery-inview",
+    "escapedName": "jquery-inview",
+    "rawSpec": "^1.1.2",
+    "saveSpec": null,
+    "fetchSpec": "^1.1.2"
+  },
+  "_requiredBy": [
+    "/react-super-components"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-inview/-/jquery-inview-1.1.2.tgz",
+  "_shasum": "6b7cf6f4c9ab0b6435e043092e19ef62600662c8",
+  "_spec": "jquery-inview@^1.1.2",
+  "_where": "c:\\Users\\Zach\\bc\\00-Homework\\Scheduler\\client\\node_modules\\react-super-components",
+  "author": {
+    "name": "Christopher Blum",
+    "email": "christopher.blum@spellboy.com"
+  },
+  "bugs": {
+    "url": "https://github.com/jardix22/jquery.inview/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Element 'inview' Event Plugin",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "homepage": "https://github.com/jardix22/jquery.inview#readme",
+  "license": "ISC",
+  "main": "jquery.inview.js",
+  "name": "jquery-inview",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/protonet/jquery.inview.git"
+  },
+  "scripts": {
+    "test": "open test/index.html"
+  },
+  "version": "1.1.2"
+}
