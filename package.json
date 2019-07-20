@@ -1,32 +1,32 @@
-    {
-        "name": "scheduler",
-        "version": "3.0.0",
-        "description": "Raft Guide Scheduling App",
-        "engines": {
-            "node": "10.15.0"
-        },
-        "scripts": {
-            "start": "node server",
-            "build": "cd react-ui/ && npm install && npm run build",
-            "seed": "node scripts/seedDB.js",
-        },
-        "cacheDirectories": [
-            "node_modules",
-            "react-ui/node_modules"
-        ],
-        "dependencies": {
-            "express": "^4.17.1"
-        },
-        "repository": {
-            "type": "git",
-            "url": "git+https://github.com/zachfey/Scheduler.git"
-        },
-        "keywords": [
-            "node",
-            "heroku",
-            "create-react-app",
-            "react"
-        ],
-        "license": "MIT",
-        "devDependencies": {}
-    }
+{
+    "name": "scheduler",
+    "version": "3.0.0",
+    "description": "Raft Guide Scheduling App",
+    "engines": {
+        "node": "10.15.0"
+    },
+    "scripts": {
+        "start": "node server",
+        "build": "cd react-ui/ && npm install && npm run build",
+        "seed": "node scripts/seedDB.js"
+    },
+    "cacheDirectories": [
+        "node_modules",
+        "react-ui/node_modules"
+    ],
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zachfey/Scheduler.git"
+    },
+    "keywords": [
+        "node",
+        "heroku",
+        "create-react-app",
+        "react"
+    ],
+    "license": "MIT",
+    "devDependencies": {}
+}
