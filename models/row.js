@@ -8,7 +8,7 @@ const rowSchema = new Schema({
     time: { type: String, required: false },
     type: { type: String, required: false },
     days: [{
-      numGuests: {type: Number, required: false},
+      numGuests: {type: String, required: false},
       guides: [String]
     }]
   }]

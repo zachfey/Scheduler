@@ -1,15 +1,10 @@
 import React, { Component } from "react";
-// import Jumbotron from "../../components/Jumbotron";
-// import DeleteBtn from "../../components/DeleteBtn";
 import Year from "../../components/Year";
 import Months from '../../components/Months';
 import Weeks from '../../components/Weeks';
 import WeekSchedule from '../../components/WeekSchedule'
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
-import Axios from "axios";
-// import { List, ListItem } from "../../components/List";
-// import { Input, TextArea, FormBtn } from "../../components/Form";
 const moment = require('moment')
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -137,18 +132,20 @@ class Scheduler extends Component {
     return years.map(year => {
       if (year === parseInt(this.state.selectedYear)) {
         return (
-          <div>
+          <React.Fragment key = 'activeYear'>
             <Year
+              key={year.toString()}
               year={year}
               handleClick={this.handleClick}
             />
             {/* {this.renderMonths(year)} */} {/*The render months function is typed out below*/}
             {this.renderMonths(year)}
-          </div>
+          </React.Fragment>
         )
       }
       return (
         <Year
+          key={year.toString()}
           year={year}
           handleClick={this.handleClick}
         />
@@ -160,18 +157,20 @@ class Scheduler extends Component {
     return months.map(month => {
       if (month === parseInt(this.state.selectedMonth)) {
         return (
-          <div>
+          <React.Fragment key = 'activeMonth'>
             <Months
+              key={month.toString()}
               month={month}
               handleClick={this.handleClick}
               monthNames={monthNames}
             />
             {this.renderWeeks(month, year)}
-          </div>
+          </React.Fragment>
         )
       } else {
         return (
           <Months
+            key={month.toString()}
             month={month}
             handleClick={this.handleClick}
             monthNames={monthNames}
@@ -186,11 +185,12 @@ class Scheduler extends Component {
     return weeks.map(week => {
       if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
         if (week === parseInt(this.state.selectedWeek)) {
-          console.log('this.state: ' + this.state)
+          // console.log('this.state: ' + this.state)
           // console.log('this.state.week.week: ' + this.state.week.week)
           return (
-            <div>
+            <React.Fragment key = 'activeWeek'>
               <Weeks
+                key={week.toString()}
                 week={week}
                 handleClick={this.handleClick}
                 weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
@@ -198,17 +198,19 @@ class Scheduler extends Component {
               />
               {(this.state.week && this.state.week.week === week) ?
                 <WeekSchedule
+                  key={(week.toString() + 'sched')}
                   week={this.state.week}
                 />
                 :
                 'Loading' //TODO add a timeout to the 'loading'
               }
 
-            </div>
+            </React.Fragment>
           )
         } else {
           return (
             <Weeks
+              key={week.toString()}
               week={week}
               handleClick={this.handleClick}
               weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
@@ -217,12 +219,13 @@ class Scheduler extends Component {
           )
         }
       }
+      return (null)
     })
 
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <Container fluid>
         <button

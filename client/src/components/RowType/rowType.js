@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import '../table.css';
-import API from '../../utils/API'
 
 class RowType extends Component {
     constructor(props) {
         super(props);
         this.state = {
             category: 'type',
-            rowIndex: props.rowIndex,
+            rowIndex: props.rowindex,
             time: props.time,
             type: props.type,
             edited: false

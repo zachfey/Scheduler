@@ -6,9 +6,9 @@ class RowDetail extends Component {
         super(props);
         this.state = {
             category: 'detail',
-            rowIndex: props.rowIndex,
-            dayIndex: props.dayIndex,
-            numGuests: props.numGuests,
+            rowIndex: props.rowindex,
+            dayIndex: props.dayindex,
+            numGuests: props.numguests,
             guides: props.guides,
             edited: false
         }
@@ -81,12 +81,11 @@ class RowDetail extends Component {
     }
 
     render() {
-        const numGuests = this.state.numGuests
         const guides = this.state.guides
         return (
             < td className={this.state.edited ? 'edited' : 'original'}>
                 <input
-                    value={numGuests}
+                    value={this.state.numGuests}
                     name="numGuests"
                     onChange={this.handleChange}
                 />

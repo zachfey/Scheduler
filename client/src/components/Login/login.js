@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import { bindActionCreators } from 'redux';
-import * as sessionActions from '../../utils/session';
 import './login.css';
 import { Form, Container, Row, Col, Card, Button } from 'react-bootstrap'
 import logo from '../../images/Raft1Logo.png'
@@ -108,11 +106,5 @@ class SignUp extends Component {
     );
   }
 }
-
-const mapDispatch = (dispatch) => {
-  return {
-    actions: bindActionCreators(sessionActions, dispatch)
-  };
-};
 
 export default SignUp;

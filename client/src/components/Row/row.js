@@ -20,24 +20,24 @@ class Row extends Component {
                     key = {this.state.row}
                     time={this.state.row.time}
                     type={this.state.row.type}
-                    rowIndex = {this.props.rowIndex}
+                    rowindex = {this.props.rowindex}
                     saveChanges = {this.props.saveChanges}
                 />
                 {this.state.row.days.map((day, index) => {
                     return (
                         <RowDetail
                             key={day}
-                            rowIndex = {this.props.rowIndex}
-                            dayIndex={index}
-                            numGuests={day.numGuests}
+                            rowindex = {this.props.rowindex}
+                            dayindex={index}
+                            numguests={day.numGuests}
                             guides={day.guides}
                             saveChanges = {this.props.saveChanges}
                         />
                     )
                 })}
                 <td>
-                    <button className = 'deleteRow' rowIndex = {this.props.rowIndex}>Delete Row</button>
-                    <button className = 'addRow' rowIndex = {this.props.rowIndex}>Add Row</button>
+                    <button className = 'deleteRow' rowindex = {this.props.rowindex}>Delete Row</button>
+                    <button className = 'addRow' rowindex = {this.props.rowindex}>Add Row</button>
                 </td>
             </tr>
         )

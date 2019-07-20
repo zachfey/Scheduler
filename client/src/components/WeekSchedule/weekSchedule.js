@@ -3,6 +3,7 @@ import Row from '../Row';
 import { Table } from 'react-bootstrap';
 import API from '../../utils/API'
 import '../table.css';
+import { createBrotliCompress } from "zlib";
 const moment = require('moment')
 
 const dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -22,7 +23,7 @@ class WeekSchedule extends Component {
     }
 
     populateDates(week, year) { //returns an array with each date of the given week (e.g. 1-Jul, 2-Jul, 3-Jul, etc.)
-        const date = moment(week + ' ' + year, "w-YYYY").format('D-MMM')
+        const date = moment(week + ' ' + year, "w-YYYY")
         let dateArray = []
         for (let i = 1; i < 8; i++) {
             dateArray.push(moment(date).add(i, 'day').format('D-MMM'))
@@ -31,7 +32,8 @@ class WeekSchedule extends Component {
     }
 
     saveChanges(state, cb) {
-        console.log('inside savechanges in weekschedule')
+        // console.log('event', event)
+        // console.log('inside savechanges in weekschedule')
         let newSched = this.state.weekSchedule;
         console.log('changes to save: ', state)
         const rowIndex = state.rowIndex;
@@ -42,15 +44,25 @@ class WeekSchedule extends Component {
                 const { time, type } = state;
                 newSched.rows[rowIndex].time = time;
                 newSched.rows[rowIndex].type = type;
-                API.updateWeek(newSched, res => cb());
+                // console.log('newSched type', newSched)
+                API.updateWeek(newSched, res => {
+                    cb()
+                    // console.log('saved data', res)
+                });
                 break;
 
             case 'detail':
                 const { dayIndex, numGuests, guides } = state;
                 newSched.rows[rowIndex].days[dayIndex].numGuests = numGuests;
                 newSched.rows[rowIndex].days[dayIndex].guides = guides;
-                API.updateWeek(newSched, res => cb());
-                cb();
+                console.log('newSched detail', newSched)
+                API.updateWeek(newSched, res => {
+                    cb()
+                    // console.log('saved data', res)
+                });
+                break;
+
+            default:
                 break;
         }
     }
@@ -75,7 +87,7 @@ class WeekSchedule extends Component {
                         return (
                             <Row
                                 key={row}
-                                rowIndex={index}
+                                rowindex={index}
                                 row={row}
                                 saveChanges={this.saveChanges}
                             />

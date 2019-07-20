@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { connect } from 'react-redux';
-import { sessionService } from 'redux-react-session'
 import Scheduler from "./pages/scheduler";
 import Header from "./components/Header";
-import SignUp from './components/SignUp'
+// import SignUp from './components/SignUp'
 import Login from './components/Login'
 import PrivateRoute from './components/PrivateRoute'
 import axios from 'axios';
@@ -29,9 +27,9 @@ class App extends Component {
 
   getUser(cb) {
     axios.get('/api/auth/user').then(response => {
-      console.log('Get user response: ', response.data)
+      // console.log('Get user response: ', response.data)
       if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ')
+        // console.log('Get User: There is a user saved in the server session: ')
         this.setState({
           loggedIn: true,
           user: response.data.user.username,
@@ -90,32 +88,5 @@ class App extends Component {
     );
   }
 }
-// const App = ({ authenticated}) => (
-
-//   <Router>
-//       <div>
-//         <Nav />
-//         <Switch>
-//           <Route exact path='/signup' component={SignUp} />
-//           <Route exact path='/login' render={(props) => <Login  {...props} logIn={this.logIn} />} />
-//           <PrivateRoute exact path='/' component={Scheduler} authenticated={authenticated} />
-//         </Switch>
-//       </div>
-//   </Router>
-// );
-// const App = ({ authenticated, checked }) => (
-//   <Router>
-//     { checked &&
-//       <div>
-//         <PrivateRoute exact path="/" component={Scheduler} authenticated={authenticated}/>
-//         <Route path="/login" component={Login}/>
-//       </div>
-//     }
-//   </Router>
-// );
-
-
-
 
 export default App;
-// export default App

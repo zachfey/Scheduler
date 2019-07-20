@@ -3,7 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 import logo from '../../images/Raft1Logo.png'
 
 function Header(props) {
-  console.log('nav props', props)
+  // console.log('nav props', props)
   return (
 
     //     <Navbar bg="primary" variant="dark">

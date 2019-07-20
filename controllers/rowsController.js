@@ -26,8 +26,8 @@ module.exports = {
   },
 
   updateWeek: function(req, res) {
-    // console.log('inside rowcontroller updateweek')
-    // console.log(req.body.rows)
+    console.log('inside rowcontroller updateweek')
+    console.log(req.body)
     db.Row
       .findOneAndUpdate({ 
         _id: req.body._id
