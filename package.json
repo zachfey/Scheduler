@@ -1,32 +1,33 @@
-    
-{
-    "name": "heroku-cra-node",
-    "version": "3.0.0",
-    "description": "How to use create-react-app with a custom Node API on Heroku",
-    "engines": {
-      "node": "10.x"
-    },
-    "scripts": {
-      "start": "node server",
-      "build": "cd react-ui/ && npm install && npm run build"
-    },
-    "cacheDirectories": [
-      "node_modules",
-      "react-ui/node_modules"
-    ],
-    "dependencies": {
-      "express": "^4.16.4"
-    },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/mars/heroku-cra-node.git"
-    },
-    "keywords": [
-      "node",
-      "heroku",
-      "create-react-app",
-      "react"
-    ],
-    "license": "MIT",
-    "devDependencies": {}
-  }
+    {
+        "name": "Raft One Scheduler",
+        "version": "3.0.0",
+        "description": "Raft Guide Scheduling App",
+        "engines": {
+            "npm": "6.4.1",
+            "node": "10.15.0"
+        },
+        "scripts": {
+            "start": "node server",
+            "build": "cd react-ui/ && npm install && npm run build",
+            "seed": "node scripts/seedDB.js",
+        },
+        "cacheDirectories": [
+            "node_modules",
+            "react-ui/node_modules"
+        ],
+        "dependencies": {
+            "express": "^4.17.1"
+        },
+        "repository": {
+            "type": "git",
+            "url": "git+https://github.com/zachfey/Scheduler.git"
+        },
+        "keywords": [
+            "node",
+            "heroku",
+            "create-react-app",
+            "react"
+        ],
+        "license": "MIT",
+        "devDependencies": {}
+    }
