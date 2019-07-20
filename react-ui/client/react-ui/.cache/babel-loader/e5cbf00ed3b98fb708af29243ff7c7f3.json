@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default } from \"./year\";","map":{"version":3,"sources":["C:\\Users\\Zach\\bc\\00-Homework\\Scheduler\\client\\src\\components\\Year\\index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,QAAxB","sourcesContent":["export { default } from \"./year\";\n"]},"metadata":{},"sourceType":"module"}
