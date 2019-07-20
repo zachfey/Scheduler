@@ -74,14 +74,20 @@ class Scheduler extends Component {
   pullSchedule = (week, year, callback) => {
     API.getWeek(week, year)
       .then(res => {
-        res.data ?
-          callback(res.data)
-          :
-          // console.log('creating empty schedule')
+        if (res.data) {
+          if(res.data.rows.length > 0){
+            callback(res.data)
+          } else{
+            API.fixWeek(week, year, res => {
+              console.log('fixed week', res.data)
+              this.findWeekSchedule(week, year);
+            })
+          }
+        } else {
           callback(
             this.createEmptySchedule(week, year)
           )
-
+        }
 
       })
       .catch(err => console.log(err))
@@ -213,10 +219,10 @@ class Scheduler extends Component {
                   handleClick={this.handleClick}
                   weekDisplayStart={moment(week + '-' + year, "w-YYYY").add(1, 'd').format('M/D/YY')}
                   weekDisplayEnd={
-                    (week < 52)?
-                    moment((week + 1) + '-' + year, "w-YYYY").format('M/D/YY')
-                    :
-                    moment(1 + '-' + (parseInt(year)+1), "w-YYYY").format('M/D/YY')
+                    (week < 52) ?
+                      moment((week + 1) + '-' + year, "w-YYYY").format('M/D/YY')
+                      :
+                      moment(1 + '-' + (parseInt(year) + 1), "w-YYYY").format('M/D/YY')
                   }
                   selected={true}
                 />
@@ -229,10 +235,10 @@ class Scheduler extends Component {
                   handleClick={this.handleClick}
                   weekDisplayStart={moment(week + '-' + year, "w-YYYY").add(1, 'd').format('M/D/YY')}
                   weekDisplayEnd={
-                    (week < 52)?
-                    moment((week + 1) + '-' + year, "w-YYYY").format('M/D/YY')
-                    :
-                    moment(1 + '-' + (parseInt(year)+1), "w-YYYY").format('M/D/YY')
+                    (week < 52) ?
+                      moment((week + 1) + '-' + year, "w-YYYY").format('M/D/YY')
+                      :
+                      moment(1 + '-' + (parseInt(year) + 1), "w-YYYY").format('M/D/YY')
                   }
                   selected={false}
                 />

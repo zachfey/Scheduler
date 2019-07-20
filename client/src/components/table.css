@@ -12,6 +12,28 @@ th, td {
     background-color:red;
   }
 
+  .saveChanges{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 75%;
+  }
+
+  .data{
+    position: relative;
+
+  }
+
+  td{
+    align-content: center;
+  }
+
+  .tableFunctions{
+    width:20px;
+  }
+
   /* .addRow{
     border: none;
     height: 1px;

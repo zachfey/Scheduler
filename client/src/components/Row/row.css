@@ -1,0 +1,21 @@
+.fa-times{
+    color:darkred;
+}
+
+.fa-times:hover {
+    color: red;
+}
+
+.fa-plus{
+    color:darkgreen;
+    position: absolute;
+    bottom: 10px;
+}
+
+.fa-plus:hover {
+    color: green;
+}
+
+.fa{
+
+}

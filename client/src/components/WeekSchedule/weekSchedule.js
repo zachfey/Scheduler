@@ -16,6 +16,8 @@ class WeekSchedule extends Component {
         }
         // this.updateSchedule = this.updateSchedule.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
+        this.deleteRow = this.deleteRow.bind(this);
+        this.addRow = this.addRow.bind(this);
     }
 
     componentDidUpdate() {
@@ -62,9 +64,30 @@ class WeekSchedule extends Component {
                 });
                 break;
 
+            case 'deleteRow':
+                API.updateWeek(newSched, res => {cb()})
+
             default:
                 break;
         }
+    }
+
+    deleteRow(rowIndex){
+        let newSched = this.state.weekSchedule
+        let newRows = []
+        for(let i = 0; i < newSched.rows.length; i++){
+            console.log(i)
+            if(i !== parseInt(rowIndex)){
+                newRows.push(newSched.rows[i])
+            }
+        }
+        newSched.category = 'deleteRow'
+        newSched.rows = newRows;
+        this.saveChanges(newSched, res => console.log(res))//TODO don't save changes immediately until user confrims
+    }
+
+    addRow(rowIndex){
+        console.log('rowIndex', rowIndex)
     }
 
     render() {
@@ -74,7 +97,6 @@ class WeekSchedule extends Component {
 
                 <thead>
                     <tr>
-                        <th><button onClick={this.updateSchedule}>Click me</button></th>
                         {dayArray.map(day => <th>{day}</th>)}
                     </tr>
                     <tr>
@@ -90,6 +112,8 @@ class WeekSchedule extends Component {
                                 rowindex={index}
                                 row={row}
                                 saveChanges={this.saveChanges}
+                                deleterow = {this.deleteRow}
+                                addrow = {this.addRow}
                             />
                         )
                     })}

@@ -1,5 +1,43 @@
 const db = require("../models");
 
+
+const emptyWeek = {
+  week: null,
+  year: null,
+  rows: [{
+    days: [{
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    }
+    ],
+    time: '',
+    type: ''
+  }]
+}
 // Defining methods for the rowsController
 module.exports = {
   findAll: function(req, res) {
@@ -37,49 +75,29 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
-  createWeek: function(req, res) {
-    console.log('req.body', req.body)
-      const emptyWeek = {
-      week: req.body.week,
-      year: req.body.year,
-      rows: [{
-        days: [{
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        },
-        {
-          numGuests: '',
-          guides: ['']
-        }
-        ],
-        time: '',
-        type: ''
-      }]
-    }
-    console.log('inside rowcontroller updateweek')
-    console.log('emptyWeek', emptyWeek)
+  fixWeek: function(req, res) {
+    console.log(req.body)
+    let newWeek = emptyWeek
+    newWeek.week = req.body.week
+    newWeek.year = req.body.year  
+
     db.Row
-      .create(emptyWeek)
+      .findOneAndUpdate({ 
+        week: req.body.week,
+        year: req.body.year
+      }, newWeek)
+      .then(dbModel => res.json(dbModel))
+      // .then(dbModel => console.log(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  createWeek: function(req, res) {
+    let newWeek = emptyWeek
+    newWeek.week = req.body.week
+    newWeek.year = req.body.year  
+
+    db.Row
+      .create(newWeek)
       .then(dbModel => res.json(dbModel))
       // .then(dbModel => console.log(dbModel))
       .catch(err => res.status(422).json(err));

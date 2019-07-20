@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../table.css';
+import { Button } from 'react-bootstrap'
 
 class RowDetail extends Component {
     constructor(props) {
@@ -17,6 +18,10 @@ class RowDetail extends Component {
         this.handleArrayChange = this.handleArrayChange.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
         this.addSubtractRows = this.addSubtractRows.bind(this);
+    }
+
+    componentDidMount(){
+        this.addSubtractRows()
     }
 
     componentDidUpdate() {
@@ -63,7 +68,7 @@ class RowDetail extends Component {
     render() {
         const guides = this.state.guides
         return (
-            < td className={this.state.edited ? 'edited' : 'original'}>
+            < td className={this.state.edited ? 'edited data' : 'original data'} align = 'center'>
                 <h4>Num Guests</h4>
                 <input
                     value={this.state.numGuests}
@@ -87,10 +92,18 @@ class RowDetail extends Component {
                         )
                     })
                 }
-                <button
-                    className='saveChanges'
-                    onClick={this.saveChanges}
-                >Save</button>
+                {this.state.edited?
+                <React.Fragment>
+                    <br/>
+                    <br/>
+                    <Button 
+                        className = 'saveChanges'
+                        onClick = {this.saveChanges}
+                    >Save</Button>
+                </React.Fragment>
+                :
+                <br/>
+                }
             </td >
         )
     }
