@@ -46,11 +46,13 @@ class RowType extends Component {
                     name = 'time'
                     onChange = {this.handleChange}
                 />
+                <br/>
                 <input
                     value={type}
                     name = 'type'
                     onChange = {this.handleChange}
                 />
+                <br/>
                 <button 
                     className = 'saveChanges'
                     onClick = {this.saveChanges}

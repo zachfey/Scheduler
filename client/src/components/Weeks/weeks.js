@@ -1,16 +1,22 @@
 import React from "react";
+import { Breadcrumb } from 'react-bootstrap';
+import './weeks.css'
 
 function Weeks(props) {
 
-    // console.log('inside weeks!')
-    return (
-        <div>
-            <br />
-            <button onClick={() => props.handleClick('week', props.week)}>
+    if (props.selected) {
+        return (
+            <Breadcrumb.Item className = 'selectedWeek' onClick={() => props.handleClick('week', props.week)}>
                 Week {props.week} ({props.weekDisplayStart} - {props.weekDisplayEnd})
-            </button>
-        </div>
-    )
+            </Breadcrumb.Item>
+        )
+    } else {
+        return (
+            <Breadcrumb.Item onClick={() => props.handleClick('week', props.week)}>
+                Week {props.week} ({props.weekDisplayStart} - {props.weekDisplayEnd})
+            </Breadcrumb.Item>
+        )
+    }
 
 
 }

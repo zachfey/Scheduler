@@ -17,11 +17,6 @@ class RowDetail extends Component {
         this.handleArrayChange = this.handleArrayChange.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
         this.addSubtractRows = this.addSubtractRows.bind(this);
-        // this.debounce = this.debounce.bind(this)
-    }
-
-    componentDidMount() {
-
     }
 
     componentDidUpdate() {
@@ -59,21 +54,6 @@ class RowDetail extends Component {
         this.setState({ guides: newGuides, edited: true })
     }
 
-    // handleChange(event) {
-    //     const {name, value} = event.target
-    //     this.props.onChange(this.props.rowIndex, 'detail', name, value, this.props.dayIndex)
-    // }
-
-    // handleArrayChange(event) { //TODO add ability to add row
-    //     const {name, value} = event.target
-    //     const index = parseInt(name)
-    //     const newGuides = this.state.guides.map((guide, i) => {
-    //         return(i === index ? value : guide)
-    //     });
-    //     this.props.onArrayChange(this.props.id, 'guides', newGuides)
-    //     // this.setState({ guides: newGuides })
-    // }
-
     saveChanges() {
         if (this.state.edited) {
             this.props.saveChanges(this.state, () => this.setState({ edited: false }))
@@ -84,20 +64,26 @@ class RowDetail extends Component {
         const guides = this.state.guides
         return (
             < td className={this.state.edited ? 'edited' : 'original'}>
+                <h4>Num Guests</h4>
                 <input
                     value={this.state.numGuests}
                     name="numGuests"
                     onChange={this.handleChange}
                 />
-                <h3>Guides</h3>
+                <br/>
+                <br/>
+                <h4>Guides</h4>
                 {
                     guides.map((guide, index) => {
                         return (
-                            <input
-                                value={guide}
-                                name={index}
-                                onChange={this.handleArrayChange}
-                            />
+                            <React.Fragment>
+                                <input
+                                    value={guide}
+                                    name={index}
+                                    onChange={this.handleArrayChange}
+                                />
+                                <br />
+                            </React.Fragment>
                         )
                     })
                 }

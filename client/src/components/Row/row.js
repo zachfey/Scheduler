@@ -37,6 +37,7 @@ class Row extends Component {
                 })}
                 <td>
                     <button className = 'deleteRow' rowindex = {this.props.rowindex}>Delete Row</button>
+                    <br/>
                     <button className = 'addRow' rowindex = {this.props.rowindex}>Add Row</button>
                 </td>
             </tr>

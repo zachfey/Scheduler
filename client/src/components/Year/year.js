@@ -1,14 +1,14 @@
 import React from 'react';
+import { Breadcrumb } from 'react-bootstrap';
 
 const Year = (props) => {
     // console.log(props)
     return (
-        <div>
-            <br />
-            <button onClick={() => props.handleClick('year', props.year)}>
+        <React.Fragment>
+            <Breadcrumb.Item onClick={() => props.handleClick('year', props.year)}>
                 {props.year}
-            </button>
-        </div>
+            </Breadcrumb.Item>
+        </React.Fragment>
     )
 }
 

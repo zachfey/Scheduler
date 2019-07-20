@@ -1,15 +1,13 @@
 import React from "react";
+import { Breadcrumb } from 'react-bootstrap';
 
 function Months(props) {
 
 
     return (
-        <div>
-            <br/>
-            <button onClick={() => props.handleClick('month', props.month)}>
-                {props.monthNames[props.month - 1]}
-            </button>
-        </div >
+        <Breadcrumb.Item onClick={() => props.handleClick('month', props.month)}>
+            {props.monthNames[props.month - 1]}
+        </Breadcrumb.Item>
     )
 
 

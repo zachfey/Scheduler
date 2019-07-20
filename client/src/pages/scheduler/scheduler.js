@@ -4,7 +4,8 @@ import Months from '../../components/Months';
 import Weeks from '../../components/Weeks';
 import WeekSchedule from '../../components/WeekSchedule'
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+// import { Col, Row, Container } from "../../components/Grid";
+import { Col, Row, Container, Breadcrumb } from 'react-bootstrap'
 const moment = require('moment')
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -16,7 +17,7 @@ for (let i = 2015; i <= moment().format('YYYY'); i++) { //TODO: update this to c
   years.push(i);
 }
 
-const weekOfYear = (month, year) => parseInt(moment(month + ' ' + year, "M-YYYY").week())
+
 
 
 class Scheduler extends Component {
@@ -30,6 +31,7 @@ class Scheduler extends Component {
       week: null
     }
     this.clickButton = this.clickButton.bind(this)
+    this.renderSchedule = this.renderSchedule.bind(this)
   }
 
   clickButton() { //test button at the top of the page
@@ -40,6 +42,15 @@ class Scheduler extends Component {
     this.findWeekSchedule(this.state.selectedWeek, this.state.selectedYear)
   }
 
+  weekOfYear = (month, year) => {
+    if (parseInt(month) < 13) {
+      return (
+        parseInt(moment(month + ' ' + year, "M-YYYY").week())
+      )
+    } else {
+      return (53)
+    }
+  }
 
   //pull that week's schedule then sets state
   findWeekSchedule = (week, year) => {
@@ -129,111 +140,144 @@ class Scheduler extends Component {
   }
 
   renderYears = () => {
-    return years.map(year => {
-      if (year === parseInt(this.state.selectedYear)) {
-        return (
-          <React.Fragment key = 'activeYear'>
+    return (
+      <Breadcrumb>
+        {years.map(year => {
+          if (year === parseInt(this.state.selectedYear)) {
+            return (
+              <React.Fragment key='activeYear'>
+                <Year
+                  key={year.toString()}
+                  year={year}
+                  handleClick={this.handleClick}
+                />
+                {this.renderMonths(year)}
+              </React.Fragment>
+            )
+          }
+          return (
             <Year
               key={year.toString()}
               year={year}
               handleClick={this.handleClick}
             />
-            {/* {this.renderMonths(year)} */} {/*The render months function is typed out below*/}
-            {this.renderMonths(year)}
-          </React.Fragment>
-        )
-      }
-      return (
-        <Year
-          key={year.toString()}
-          year={year}
-          handleClick={this.handleClick}
-        />
-      )
-    })
+          )
+        })}
+      </Breadcrumb>
+    )
   }
 
   renderMonths = year => {
-    return months.map(month => {
-      if (month === parseInt(this.state.selectedMonth)) {
-        return (
-          <React.Fragment key = 'activeMonth'>
-            <Months
-              key={month.toString()}
-              month={month}
-              handleClick={this.handleClick}
-              monthNames={monthNames}
-            />
-            {this.renderWeeks(month, year)}
-          </React.Fragment>
-        )
-      } else {
-        return (
-          <Months
-            key={month.toString()}
-            month={month}
-            handleClick={this.handleClick}
-            monthNames={monthNames}
-          />
-        )
-      }
-    })
+    return (
+      <Breadcrumb>
+        {months.map(month => {
+          if (month === parseInt(this.state.selectedMonth)) {
+            return (
+              <React.Fragment key='activeMonth'>
+                <Months
+                  key={month.toString()}
+                  month={month}
+                  handleClick={this.handleClick}
+                  monthNames={monthNames}
+                />
+                {this.renderWeeks(month, year)}
+              </React.Fragment>
+            )
+          } else {
+            return (
+              <Months
+                key={month.toString()}
+                month={month}
+                handleClick={this.handleClick}
+                monthNames={monthNames}
+              />
+            )
+          }
+        })}
+      </Breadcrumb>
+    )
 
   }
 
   renderWeeks(month, year) {
-    return weeks.map(week => {
-      if (week < weekOfYear((parseInt(month) + 1), year) && week >= weekOfYear(month, year)) {
-        if (week === parseInt(this.state.selectedWeek)) {
-          // console.log('this.state: ' + this.state)
-          // console.log('this.state.week.week: ' + this.state.week.week)
-          return (
-            <React.Fragment key = 'activeWeek'>
-              <Weeks
-                key={week.toString()}
-                week={week}
-                handleClick={this.handleClick}
-                weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
-                weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
-              />
-              {(this.state.week && this.state.week.week === week) ?
-                <WeekSchedule
-                  key={(week.toString() + 'sched')}
-                  week={this.state.week}
+    return (
+      <Breadcrumb>
+        {weeks.map(week => {
+          if (week < this.weekOfYear((parseInt(month + 1)), year) && week >= this.weekOfYear(month, year)) {
+            if (week === parseInt(this.state.selectedWeek)) {
+              // console.log('this.state: ' + this.state)
+              return (
+                <Weeks
+                  key={week.toString()}
+                  week={week}
+                  handleClick={this.handleClick}
+                  weekDisplayStart={moment(week + '-' + year, "w-YYYY").add(1, 'd').format('M/D/YY')}
+                  weekDisplayEnd={
+                    (week < 52)?
+                    moment((week + 1) + '-' + year, "w-YYYY").format('M/D/YY')
+                    :
+                    moment(1 + '-' + (parseInt(year)+1), "w-YYYY").format('M/D/YY')
+                  }
+                  selected={true}
                 />
-                :
-                'Loading' //TODO add a timeout to the 'loading'
-              }
+              )
+            } else {
+              return (
+                <Weeks
+                  key={week.toString()}
+                  week={week}
+                  handleClick={this.handleClick}
+                  weekDisplayStart={moment(week + '-' + year, "w-YYYY").add(1, 'd').format('M/D/YY')}
+                  weekDisplayEnd={
+                    (week < 52)?
+                    moment((week + 1) + '-' + year, "w-YYYY").format('M/D/YY')
+                    :
+                    moment(1 + '-' + (parseInt(year)+1), "w-YYYY").format('M/D/YY')
+                  }
+                  selected={false}
+                />
+              )
+            }
+          }
+          return (null)
+        })}
+      </Breadcrumb>
+    )
+  }
 
-            </React.Fragment>
-          )
-        } else {
-          return (
-            <Weeks
-              key={week.toString()}
-              week={week}
-              handleClick={this.handleClick}
-              weekDisplayStart={moment(week + ' ' + year, "w-YYYY").format('M/D/YY')}
-              weekDisplayEnd={moment((week + 1) + ' ' + year, "w-YYYY").format('M/D/YY')}
+  renderSchedule() {
+    if (this.state.selectedWeek && this.state.week) {
+
+      if (parseInt(this.state.selectedWeek) === parseInt(this.state.week.week)) {
+        return (
+          <React.Fragment>
+            <h1>Week {this.state.selectedWeek}</h1>
+            <WeekSchedule
+              key={(this.state.week.toString() + 'sched')}
+              week={this.state.week}
             />
-          )
-        }
+          </React.Fragment>
+        )
+      } else {
+        return (
+          'Loading'
+        )
       }
-      return (null)
-    })
-
+    } else {
+      return (
+        <br />
+      )
+    }
   }
 
   render() {
     // console.log(this.state)
     return (
       <Container fluid>
-        <button
-          onClick={this.clickButton}
-        >Log Out </button>
         <Row>
           <Col size="md-6 sm-12">
             {this.renderYears()}
+            {this.renderSchedule()}
           </Col>
         </Row>
       </Container>
