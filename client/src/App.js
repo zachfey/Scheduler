@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
 import { sessionService } from 'redux-react-session'
 import Scheduler from "./pages/scheduler";
-import Nav from "./components/Nav";
+import Header from "./components/Header";
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import PrivateRoute from './components/PrivateRoute'
@@ -75,7 +75,7 @@ class App extends Component {
       <Router>
         {this.state && this.state.checked &&
           <React.Fragment>
-            <Nav 
+            <Header 
               loggedIn = {this.state.loggedIn}
               user = {this.state.user}
               logOut = {this.logOut}

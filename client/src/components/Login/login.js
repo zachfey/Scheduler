@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as sessionActions from '../../utils/session';
+import './login.css';
+import { Form, Container, Row, Col, Card, Button } from 'react-bootstrap'
+import logo from '../../images/Raft1Logo.png'
 
 class SignUp extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class SignUp extends Component {
     this.state = {
       username: '',
       password: '',
-
+      wrongPassword: false
     }
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,40 +44,67 @@ class SignUp extends Component {
         if (res.status === 200) {
           console.log(this.props)
           console.log('login success!')
-          //   console.log(res.data)
-          //   console.log('redirecting')
           this.props.logIn(res.data.username)
           this.props.history.push('/')
         }
-      }).catch(err => console.log(err))
+      }).catch(err => {
+        this.setState({ wrongPassword: true })
+      })
   }
 
   render() {
     return (
-      <form className="form-group">
-        Log in
-                <br />
-        <label>Username:</label>
-        <input
-          type='text'
-          name='username'
-          value={this.state.username}
-          onChange={this.onChange}
-        />
-        <label>Password:</label>
-        <input
-          type='text'
-          name='password'
-          value={this.state.password}
-          onChange={this.onChange}
-        />
-        <button
-          onClick={this.handleSubmit}
-        >
-          Submit
+      <Container>
+        <br />
+        <br />
+        <Row classname='loginRow'>
+          <Col className='intro-column'>
 
-                </button>
-      </form>
+            <h1 className='text-center'>Raft 1 Scheduler Portal</h1>
+            <br />
+            <Card.Img src={logo} fluid />
+          </Col>
+          <Col className='login-column'>
+            <Card bg='light' >
+              <Card.Body>
+                <Card.Title>Log in</Card.Title>
+
+                <Form className="form-group" >
+                  <Form.Group controlID='formUsername'>
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control
+                      type='username'
+                      placeholder='Username'
+                      name='username'
+                      value={this.state.username}
+                      onChange={this.onChange} />
+                  </Form.Group>
+                  <Form.Group controlID='formPassword'>
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control
+                      type='password'
+                      placeholder='Password'
+                      name='password'
+                      value={this.state.password}
+                      onChange={this.onChange} />
+                  </Form.Group>
+                  {(this.state.wrongPassword) ?
+                    <p className='incorrect-password'>Incorrect Password!</p>
+                    :
+                    <br />
+                  }
+                  <Button variant="primary" size="lg" block
+                    onClick={this.handleSubmit}
+                  >
+                    Log In
+                </Button>
+                </Form>
+
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

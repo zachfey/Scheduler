@@ -1,0 +1,23 @@
+.intro-column{
+    margin: auto;
+}
+
+.incorrect-password{
+    color:red;
+}
+
+/* .loginRow{
+    height: 400px !important;
+} */
+
+.sign-out{
+    border: none;
+    background: none;
+    text-decoration: underline;
+    color: white;
+    font-size:10px;
+}
+
+.sign-out:hover{
+    color: lightgrey;
+}
