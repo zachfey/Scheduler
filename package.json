@@ -8,8 +8,7 @@
     "scripts": {
         "start": "node server",
         "build": "cd react-ui/ && npm install && npm run build",
-        "seed": "node scripts/seedDB.js",
-        "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+        "seed": "node scripts/seedDB.js"
     },
     "cacheDirectories": [
         "node_modules",
