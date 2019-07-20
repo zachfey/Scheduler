@@ -1,9 +1,8 @@
     {
-        "name": "Raft One Scheduler",
+        "name": "scheduler",
         "version": "3.0.0",
         "description": "Raft Guide Scheduling App",
         "engines": {
-            "npm": "6.4.1",
             "node": "10.15.0"
         },
         "scripts": {
