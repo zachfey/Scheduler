@@ -10,7 +10,6 @@ module.exports = {
   signUp: function (req, res) {
     const { username, password } = req.body
     req.session.username = username;
-    console.log('req.session:', req.session)
 
     db.User
       .create(req.body)

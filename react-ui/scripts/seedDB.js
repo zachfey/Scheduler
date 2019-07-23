@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const db = require("../models");
+const bcrypt = require('bcrypt')
 
 // This file empties the Rows collection and inserts the rows below
 
@@ -111,19 +112,38 @@ const rowSeed = [
       }
       ]
     }
-  ]
+    ]
 
   }
 ];
 
-db.Row
+const userSeed = [{
+  username: 'Zachary',
+  password: bcrypt.hashSync('zachary', 10)
+}]
+
+const seedRow = () => {
+  db.Row
   .remove({})
   .then(() => db.Row.collection.insertMany(rowSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.result.n + " schedules inserted!");
     process.exit(0);
   })
   .catch(err => {
     console.error(err);
+    process.exit(1);
+  });
+}
+
+
+db.User.collection.insertMany(userSeed)
+  .then(data => {
+    console.log(data.result.n + ' users inserted!');
+    
+    seedRow()
+  })
+  .catch(err => {
+    console.log(err);
     process.exit(1);
   });

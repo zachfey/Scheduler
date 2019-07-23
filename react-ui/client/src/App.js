@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Scheduler from "./pages/scheduler";
 import Header from "./components/Header";
-// import SignUp from './components/SignUp'
+import SignUp from './components/SignUp'
 import Login from './components/Login'
 import PrivateRoute from './components/PrivateRoute'
 import axios from 'axios';
@@ -78,6 +78,7 @@ class App extends Component {
               user = {this.state.user}
               logOut = {this.logOut}
             />
+            <SignUp/>
             <Switch>
               <PrivateRoute exact path="/" component={Scheduler} authenticated={this.state.loggedIn} />
               <Route path="/login" render={(props) => <Login  {...props} logIn={this.logIn} />} />
