@@ -91,7 +91,7 @@ class SignUp extends Component {
                     :
                     <br />
                   }
-                  <Button variant="primary" size="lg" block
+                  <Button variant="primary" size="lg" block type = 'submit'
                     onClick={this.handleSubmit}
                   >
                     Log In

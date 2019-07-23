@@ -252,6 +252,7 @@ class Scheduler extends Component {
   }
 
   renderSchedule() {
+    console.log('render schedule')
     if (this.state.selectedWeek && this.state.week) {
 
       if (parseInt(this.state.selectedWeek) === parseInt(this.state.week.week)) {
@@ -261,6 +262,7 @@ class Scheduler extends Component {
             <WeekSchedule
               key={(this.state.week.toString() + 'sched')}
               week={this.state.week}
+              renderschedule = {this.renderSchedule}
             />
           </React.Fragment>
         )

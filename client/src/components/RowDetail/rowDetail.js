@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import '../table.css';
-import { Button } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 
 class RowDetail extends Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class RowDetail extends Component {
             category: 'detail',
             rowIndex: props.rowindex,
             dayIndex: props.dayindex,
-            numGuests: props.numguests,
+            numGuests: props.numguests || '',
             guides: props.guides,
             edited: false
         }
@@ -68,9 +68,10 @@ class RowDetail extends Component {
     render() {
         const guides = this.state.guides
         return (
-            < td className={this.state.edited ? 'edited data' : 'original data'} align = 'center'>
+            < td className={this.state.edited ? 'edited data' : 'original data'} align = 'center' key = {'td' + this.props.rowIndex + this.props.dayIndex}>
                 <h4>Num Guests</h4>
                 <input
+                    key = {'numGuests' + this.props.rowIndex + this.props.dayIndex}
                     value={this.state.numGuests}
                     name="numGuests"
                     onChange={this.handleChange}
@@ -81,13 +82,14 @@ class RowDetail extends Component {
                 {
                     guides.map((guide, index) => {
                         return (
-                            <React.Fragment>
+                            <React.Fragment key={'fragment' + this.state.rowIndex + this.state.dayIndex}>
                                 <input
+                                    key = {'guide' + this.props.rowIndex + this.props.dayIndex}
                                     value={guide}
                                     name={index}
                                     onChange={this.handleArrayChange}
                                 />
-                                <br />
+                                <br key = {'br' +  + this.props.rowIndex + this.props.dayIndex}/>
                             </React.Fragment>
                         )
                     })

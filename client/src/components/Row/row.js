@@ -4,7 +4,7 @@ import RowDetail from '../RowDetail';
 import '../table.css';
 import { Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlus, faTimes} from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import './row.css'
 
 
@@ -19,19 +19,19 @@ class Row extends Component {
         this.deleteRow = this.deleteRow.bind(this);
     }
 
-    addRow(){
+    addRow() {
         this.props.addrow(this.props.rowindex);
     }
 
-    deleteRow(){
+    deleteRow() {
         this.props.deleterow(this.props.rowindex);
     }
 
     render() {
         return (
-            <tr className='border_bottom'>
+            <tr className='border_bottom' key = {this.props.rowIndex + 'tr'}>
                 <RowType
-                    key={this.state.row}
+                    key={this.props.rowindex + 'mainRow'}
                     time={this.state.row.time}
                     type={this.state.row.type}
                     rowindex={this.props.rowindex}
@@ -40,7 +40,7 @@ class Row extends Component {
                 {this.state.row.days.map((day, index) => {
                     return (
                         <RowDetail
-                            key={day}
+                            key={index + this.props.rowindex}
                             rowindex={this.props.rowindex}
                             dayindex={index}
                             numguests={day.numGuests}
@@ -50,16 +50,18 @@ class Row extends Component {
                     )
                 })}
                 <td className='data tableFunctions'>
-                    <FontAwesomeIcon 
-                        icon = {faTimes} 
-                        pull = 'right'
-                        onClick = {this.deleteRow}
+                    <FontAwesomeIcon
+                        key={'delete' + this.props.rowIndex}
+                        icon={faTimes}
+                        pull='right'
+                        onClick={this.deleteRow}
                     />
                     <br />
-                    <FontAwesomeIcon 
-                        icon = {faPlus} 
-                        pull = 'right'
-                        onClick = {this.addRow}
+                    <FontAwesomeIcon
+                        key={'add' + this.props.rowIndex}
+                        icon={faPlus}
+                        pull='right'
+                        onClick={this.addRow}
                     />
                 </td>
             </tr>

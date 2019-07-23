@@ -78,7 +78,7 @@ class App extends Component {
               user = {this.state.user}
               logOut = {this.logOut}
             />
-            <SignUp/>
+            {/* <SignUp/> */}
             <Switch>
               <PrivateRoute exact path="/" component={Scheduler} authenticated={this.state.loggedIn} />
               <Route path="/login" render={(props) => <Login  {...props} logIn={this.logIn} />} />

@@ -8,13 +8,46 @@ const moment = require('moment')
 
 const dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
+const emptyRow = {
+    days: [{
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    },
+    {
+      numGuests: '',
+      guides: ['']
+    }
+    ],
+    time: '',
+    type: ''
+  }
+
 class WeekSchedule extends Component {
     constructor(props) {
         super(props);
         this.state = { //TODO change this from state to database query
             weekSchedule: this.props.week || {}
         }
-        // this.updateSchedule = this.updateSchedule.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
         this.addRow = this.addRow.bind(this);
@@ -65,58 +98,71 @@ class WeekSchedule extends Component {
                 break;
 
             case 'deleteRow':
-                API.updateWeek(newSched, res => {cb()})
+                API.updateWeek(newSched, res => cb(res) )
+                break;
+
+            case 'addRow':
+                API.updateWeek(newSched, res => cb(res))
+                break;
 
             default:
                 break;
         }
     }
 
-    deleteRow(rowIndex){
+    deleteRow(rowIndex) {
         let newSched = this.state.weekSchedule
         let newRows = []
-        for(let i = 0; i < newSched.rows.length; i++){
+        for (let i = 0; i < newSched.rows.length; i++) {
             console.log(i)
-            if(i !== parseInt(rowIndex)){
+            if (i !== parseInt(rowIndex)) {
                 newRows.push(newSched.rows[i])
             }
         }
         newSched.category = 'deleteRow'
         newSched.rows = newRows;
-        this.saveChanges(newSched, res => console.log(res))//TODO don't save changes immediately until user confrims
+        this.saveChanges(newSched, res => this.setState({weekSchedule: newSched}))//TODO don't save changes immediately until user confrims
     }
 
-    addRow(rowIndex){
-        console.log('rowIndex', rowIndex)
+    addRow(rowIndex) {
+        let newSched = this.state.weekSchedule;
+        // console.log('before row added', newSched);
+        // console.log('insert after',rowIndex)
+        newSched.rows.splice(rowIndex + 1, 0, emptyRow);
+        newSched.category = 'addRow'
+        // console.log('blank row added', newSched)
+        this.saveChanges(newSched, res => this.setState({weekSchedule: newSched}));
     }
 
     render() {
-        // console.log(this.state.week.rows)
+        console.log('weekSchedule', this.state.weekSchedule)
         return (
             <Table striped bordered hover>
 
                 <thead>
                     <tr>
-                        {dayArray.map(day => <th>{day}</th>)}
+                        <td></td>
+                        {dayArray.map(day => <th key = {day}>{day}</th>)}
                     </tr>
                     <tr>
                         <th></th>
-                        {this.populateDates(this.state.weekSchedule.week, this.state.weekSchedule.year).map(date => <th>{date}</th>)}
+
+                        {this.populateDates(this.state.weekSchedule.week, this.state.weekSchedule.year).map(date => <th key = {date}>{date}</th>)}
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.weekSchedule.rows.map((row, index) => {
+                    {(this.state.weekSchedule && this.state.weekSchedule.rows && this.state.weekSchedule.rows.map((row, index) => {
                         return (
                             <Row
-                                key={row}
+                                key={index}
                                 rowindex={index}
                                 row={row}
                                 saveChanges={this.saveChanges}
-                                deleterow = {this.deleteRow}
-                                addrow = {this.addRow}
+                                deleterow={this.deleteRow}
+                                addrow={this.addRow}
                             />
                         )
-                    })}
+                    }))}
                     <tr>
 
                     </tr>
