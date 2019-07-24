@@ -1,12 +1,13 @@
 # Scheduler
 ## To run:
 
+cd scheduler
 
-Npm install
+npm install
 
 npm run seed
 
-Npm start
+npm start
 
 ## Description
 A scheduling application for Raft One. Future functionality will include the ability to export schedule in a format compatible with payroll.
