@@ -14,13 +14,13 @@ For now, login with username: 'Zachary' and password: 'zachary'. There is no sig
 
 
 Technologies used:
--Axios
--Bcrypt
--Bootstrap
--Mongo
--NodeJS
--Express
--MomentJS
--Mongoose
--PassportJS
--ReactJS
+- Axios
+- Bcrypt
+- Bootstrap
+- Mongo
+- NodeJS
+- Express
+- MomentJS
+- Mongoose
+- PassportJS
+- ReactJS
