@@ -1,4 +1,6 @@
 # Scheduler
+Note: This application is currently under development
+
 ## To run:
 
 cd scheduler
