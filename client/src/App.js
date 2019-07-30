@@ -71,20 +71,21 @@ class App extends Component {
   render() {
     return (
       <Router>
-        {this.state && this.state.checked &&
-          <React.Fragment>
-            <Header 
-              loggedIn = {this.state.loggedIn}
-              user = {this.state.user}
-              logOut = {this.logOut}
-            />
+        <Route exact path="/" component={Scheduler} />
+        {/* {this.state && this.state.checked && */}
+          {/* <React.Fragment> */}
+            {/* <Header  */}
+              {/* loggedIn = {this.state.loggedIn} */}
+              {/* user = {this.state.user} */}
+              {/* logOut = {this.logOut} */}
+            {/* /> */}
             {/* <SignUp/> */}
-            <Switch>
-              <PrivateRoute exact path="/" component={Scheduler} authenticated={this.state.loggedIn} />
-              <Route path="/login" render={(props) => <Login  {...props} logIn={this.logIn} />} />
-            </Switch>
-          </React.Fragment>
-        }
+            {/* <Switch> */}
+              {/* <PrivateRoute exact path="/" component={Scheduler} authenticated={this.state.loggedIn} /> */}
+              {/* <Route path="/login" render={(props) => <Login  {...props} logIn={this.logIn} />} /> */}
+            {/* </Switch> */}
+          {/* </React.Fragment> */}
+        {/* } */}
       </Router>
     );
   }
