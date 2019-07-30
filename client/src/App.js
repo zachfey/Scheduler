@@ -68,7 +68,7 @@ class App extends Component {
   }
 
   nothing(){
-    <Router>
+return(    <Router>
     {this.state && this.state.checked &&
       <React.Fragment>
         <Header 
@@ -83,7 +83,7 @@ class App extends Component {
         </Switch>
       </React.Fragment>
     }
-  </Router>
+  </Router>)
   }
 
   render() {
