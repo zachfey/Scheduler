@@ -88,7 +88,7 @@ return(    <Router>
 
   render() {
     return (
-      <Scheduler />
+      <div>Hello World</div>
 
     );
   }
