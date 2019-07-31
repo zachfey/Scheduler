@@ -9,7 +9,11 @@ router.route("/signup")
 
 
 router.route('/login')
-  .post(authController.logLoginRequest, passport.authenticate('local'), authController.loginSuccess)
+  .post(authController.logLoginRequest, passport.authenticate('local', function(err, user, info){
+    console.log('err', err)
+    console.log('user', user)
+    console.log('info', info)
+  }), authController.loginSuccess)
 
 router.route('/logout')
   .post(authController.logOut)
