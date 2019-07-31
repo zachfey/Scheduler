@@ -24,11 +24,12 @@ app.use(
 )
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get('/*', function (req, res) {
-    console.log('serving up index.html')
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
-  })
+  // app.use(express.static("client/build"));
+  // app.get('/*', function (req, res) {
+  //   console.log('serving up index.html')
+  //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+  // })
+  app.use(express.static(path.resolve(__dirname, 'client/build')))
 }
 
 // Initialize passport session
