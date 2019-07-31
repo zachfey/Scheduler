@@ -5,6 +5,7 @@ const routes = require("./routes");
 const session = require('express-session')
 const passport = require('./passport');
 const MongoStore = require('connect-mongo')(session)
+const path = require('path');
 // const dbConnection = require('./models')
 const app = express();
 const PORT = process.env.PORT || 3001;
