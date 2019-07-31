@@ -56,9 +56,9 @@ class App extends Component {
     })
   }
 
-  logOut(){
+  logOut() {
     console.log('logging out')
-    axios.post('/api/auth/logout').then(res =>{
+    axios.post('/api/auth/logout').then(res => {
       console.log(res);
       this.setState({
         user: null,
@@ -67,28 +67,24 @@ class App extends Component {
     })
   }
 
-  nothing(){
-return(    <Router>
-    {this.state && this.state.checked &&
-      <React.Fragment>
-        <Header 
-          loggedIn = {this.state.loggedIn}
-          user = {this.state.user}
-          logOut = {this.logOut}
-        />
-        {/* <SignUp/> */}
-        <Switch>
-          <PrivateRoute exact path="/" component={Scheduler} authenticated={this.state.loggedIn} />
-          <Route path="/login" render={(props) => <Login  {...props} logIn={this.logIn} />} />
-        </Switch>
-      </React.Fragment>
-    }
-  </Router>)
-  }
-
   render() {
     return (
-      <div>Hello World</div>
+      <Router>
+        {this.state && this.state.checked &&
+          <React.Fragment>
+            <Header
+              loggedIn={this.state.loggedIn}
+              user={this.state.user}
+              logOut={this.logOut}
+            />
+            {/* <SignUp/> */}
+            <Switch>
+              <PrivateRoute exact path="/" component={Scheduler} authenticated={this.state.loggedIn} />
+              <Route path="/login" render={(props) => <Login  {...props} logIn={this.logIn} />} />
+            </Switch>
+          </React.Fragment>
+        }
+      </Router>
 
     );
   }
