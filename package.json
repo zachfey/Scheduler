@@ -15,7 +15,7 @@
     "seed": "node scripts/seedDB",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "node scripts/seedDB"
+    "heroku-postbuild": "node scripts/seedDB && npm run build"
   },
   "author": "Zach Fey",
   "license": "ISC",
