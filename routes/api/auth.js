@@ -13,6 +13,7 @@ router.route('/login')
     console.log('err', err)
     console.log('user', user)
     console.log('info', info)
+    next()
   }), authController.loginSuccess)
 
 router.route('/logout')
