@@ -1,15 +1,10 @@
 # Scheduler
-Note: This application is currently under development
 
 ## To run:
 
-cd scheduler
+Check it out here! https://stark-falls-68416.herokuapp.com/
 
-npm install
-
-npm run seed
-
-npm start
+To login use username: Zachary and password: zachary
 
 ## Description
 A scheduling application for Raft One. Future functionality will include the ability to export schedule in a format compatible with payroll.
