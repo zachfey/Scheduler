@@ -150,20 +150,18 @@ class WeekSchedule extends Component {
                         {this.populateDates(this.state.weekSchedule.week, this.state.weekSchedule.year).map(date => <Col key={date}><h5>{date}</h5></Col>)}
                     </Row>
 
-                    <Row>
-                        {(this.state.weekSchedule && this.state.weekSchedule.rows && this.state.weekSchedule.rows.map((row, index) => {
-                            return (
-                                <RowData
-                                    key={index}
-                                    rowindex={index}
-                                    row={row}
-                                    saveChanges={this.saveChanges}
-                                    deleterow={this.deleteRow}
-                                    addrow={this.addRow}
-                                />
-                            )
-                        }))}
-                    </Row>
+                    {(this.state.weekSchedule && this.state.weekSchedule.rows && this.state.weekSchedule.rows.map((row, index) => {
+                        return (
+                            <RowData
+                                key={index}
+                                rowindex={index}
+                                row={row}
+                                saveChanges={this.saveChanges}
+                                deleterow={this.deleteRow}
+                                addrow={this.addRow}
+                            />
+                        )
+                    }))}
                 </Col>
             </Container>
         )

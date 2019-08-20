@@ -68,10 +68,10 @@ class RowDetail extends Component {
     render() {
         const guides = this.state.guides
         return (
-            < Col className={this.state.edited ? 'edited data' : 'original data'} align = 'center' key = {'td' + this.props.rowIndex + this.props.dayIndex}>
+            < Col className={this.state.edited ? 'edited data' : 'original data'} align = 'center' key = {'td' + this.props.rowindex + this.props.dayindex}>
                 <h4>Num Guests</h4>
                 <input
-                    key = {'numGuests' + this.props.rowIndex + this.props.dayIndex}
+                    key = {'numGuests' + this.props.rowindex + this.props.dayindex}
                     value={this.state.numGuests}
                     name="numGuests"
                     onChange={this.handleChange}
@@ -82,14 +82,14 @@ class RowDetail extends Component {
                 {
                     guides.map((guide, index) => {
                         return (
-                            <React.Fragment key={'fragment' + this.state.rowIndex + this.state.dayIndex}>
+                            <React.Fragment key={'fragment' + this.props.rowindex + this.props.dayindex + index}>
                                 <input
-                                    key = {'guide' + this.props.rowIndex + this.props.dayIndex}
+                                    key = {'guide' + this.props.rowindex + this.props.dayindex}
                                     value={guide}
                                     name={index}
                                     onChange={this.handleArrayChange}
                                 />
-                                <br key = {'br' +  + this.props.rowIndex + this.props.dayIndex}/>
+                                <br key = {'br' +  + this.props.rowindex + this.props.dayindex}/>
                             </React.Fragment>
                         )
                     })

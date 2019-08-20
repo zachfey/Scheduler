@@ -281,12 +281,8 @@ class Scheduler extends Component {
     // console.log(this.state)
     return (
       <Container fluid>
-        {/* <Row>
-          <Col> */}
             {this.renderYears()}
             {this.renderSchedule()}
-          {/* </Col>
-        </Row> */}
       </Container>
     );
   }

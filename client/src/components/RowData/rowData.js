@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import RowType from '../RowType';
 import RowDetail from '../RowDetail';
-import '../table.css';
+// import '../table.css';
 import { Row } from 'react-bootstrap';
 // import { Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
-import './rowData.css'
+// import './rowData.css'
 
 
 class rowData extends Component {
@@ -30,7 +30,7 @@ class rowData extends Component {
 
     render() {
         return (
-            <Row key = {this.props.rowIndex + 'tr'}>
+            <Row key = {this.props.rowindex + 'tr'}>
                 <RowType
                     key={this.props.rowindex + 'mainRow'}
                     time={this.state.row.time}
@@ -50,7 +50,7 @@ class rowData extends Component {
                         />
                     )
                 })}
-                <td className='data tableFunctions'>
+                {/* <Col className='data tableFunctions'>
                     <FontAwesomeIcon
                         key={'delete' + this.props.rowIndex}
                         icon={faTimes}
@@ -64,7 +64,7 @@ class rowData extends Component {
                         pull='right'
                         onClick={this.addRow}
                     />
-                </td>
+                </Col> */}
             </Row>
         )
     }

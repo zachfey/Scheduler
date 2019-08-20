@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import '../table.css';
+// import '../table.css';
 import { Button, Col } from 'react-bootstrap'
 
 class RowType extends Component {
