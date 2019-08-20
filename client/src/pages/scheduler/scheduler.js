@@ -4,7 +4,6 @@ import Months from '../../components/Months';
 import Weeks from '../../components/Weeks';
 import WeekSchedule from '../../components/WeekSchedule'
 import API from "../../utils/API";
-// import { Col, Row, Container } from "../../components/Grid";
 import { Col, Row, Container, Breadcrumb } from 'react-bootstrap'
 const moment = require('moment')
 
@@ -282,12 +281,12 @@ class Scheduler extends Component {
     // console.log(this.state)
     return (
       <Container fluid>
-        <Row>
-          <Col size="md-6 sm-12">
+        {/* <Row>
+          <Col> */}
             {this.renderYears()}
             {this.renderSchedule()}
-          </Col>
-        </Row>
+          {/* </Col>
+        </Row> */}
       </Container>
     );
   }

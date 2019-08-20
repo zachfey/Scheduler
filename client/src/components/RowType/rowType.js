@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import '../table.css';
-import { Button } from 'react-bootstrap'
+import { Button, Col } from 'react-bootstrap'
 
 class RowType extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ class RowType extends Component {
         const time = this.state.time;
         const type = this.state.type;
         return (
-            <td className = {this.state.edited ? 'edited data' : 'original data'}>
+            <Col className = {this.state.edited ? 'edited data' : 'original data'}>
                 <input
                     value={time}
                     name = 'time'
@@ -62,7 +62,7 @@ class RowType extends Component {
                 :
                 <br/>
                 }
-            </td>
+            </Col>
         )
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import '../table.css';
-import { Button, Form } from 'react-bootstrap'
+import { Button, Col } from 'react-bootstrap'
 
 class RowDetail extends Component {
     constructor(props) {
@@ -68,7 +68,7 @@ class RowDetail extends Component {
     render() {
         const guides = this.state.guides
         return (
-            < td className={this.state.edited ? 'edited data' : 'original data'} align = 'center' key = {'td' + this.props.rowIndex + this.props.dayIndex}>
+            < Col className={this.state.edited ? 'edited data' : 'original data'} align = 'center' key = {'td' + this.props.rowIndex + this.props.dayIndex}>
                 <h4>Num Guests</h4>
                 <input
                     key = {'numGuests' + this.props.rowIndex + this.props.dayIndex}
@@ -106,7 +106,7 @@ class RowDetail extends Component {
                 :
                 <br/>
                 }
-            </td >
+            </Col >
         )
     }
 }

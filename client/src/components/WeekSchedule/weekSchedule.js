@@ -1,46 +1,46 @@
 import React, { Component } from "react";
-import Row from '../Row';
-import { Table } from 'react-bootstrap';
+import RowData from '../RowData';
+import { Container, Row, Col } from 'react-bootstrap';
 import API from '../../utils/API'
-import '../table.css';
-import { createBrotliCompress } from "zlib";
+// import '../table.css';
+// import { createBrotliCompress } from "zlib";
 const moment = require('moment')
 
 const dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 const emptyRow = {
     days: [{
-      numGuests: '',
-      guides: ['']
+        numGuests: '',
+        guides: ['']
     },
     {
-      numGuests: '',
-      guides: ['']
+        numGuests: '',
+        guides: ['']
     },
     {
-      numGuests: '',
-      guides: ['']
+        numGuests: '',
+        guides: ['']
     },
     {
-      numGuests: '',
-      guides: ['']
+        numGuests: '',
+        guides: ['']
     },
     {
-      numGuests: '',
-      guides: ['']
+        numGuests: '',
+        guides: ['']
     },
     {
-      numGuests: '',
-      guides: ['']
+        numGuests: '',
+        guides: ['']
     },
     {
-      numGuests: '',
-      guides: ['']
+        numGuests: '',
+        guides: ['']
     }
     ],
     time: '',
     type: ''
-  }
+}
 
 class WeekSchedule extends Component {
     constructor(props) {
@@ -98,7 +98,7 @@ class WeekSchedule extends Component {
                 break;
 
             case 'deleteRow':
-                API.updateWeek(newSched, res => cb(res) )
+                API.updateWeek(newSched, res => cb(res))
                 break;
 
             case 'addRow':
@@ -121,7 +121,7 @@ class WeekSchedule extends Component {
         }
         newSched.category = 'deleteRow'
         newSched.rows = newRows;
-        this.saveChanges(newSched, res => this.setState({weekSchedule: newSched}))//TODO don't save changes immediately until user confrims
+        this.saveChanges(newSched, res => this.setState({ weekSchedule: newSched }))//TODO don't save changes immediately until user confrims
     }
 
     addRow(rowIndex) {
@@ -131,43 +131,41 @@ class WeekSchedule extends Component {
         newSched.rows.splice(rowIndex + 1, 0, emptyRow);
         newSched.category = 'addRow'
         // console.log('blank row added', newSched)
-        this.saveChanges(newSched, res => this.setState({weekSchedule: newSched}));
+        this.saveChanges(newSched, res => this.setState({ weekSchedule: newSched }));
     }
 
     render() {
         console.log('weekSchedule', this.state.weekSchedule)
         return (
-            <Table striped bordered hover>
+            // <Table striped bordered hover>
+            <Container fluid='true'>
+                <Col>
+                    <Row>
+                        <Col></Col>
+                        {dayArray.map(day => <Col key={day}><h4>{day}</h4></Col>)}
+                    </Row>
+                    <Row>
+                        <Col></Col>
 
-                <thead>
-                    <tr>
-                        <td></td>
-                        {dayArray.map(day => <th key = {day}>{day}</th>)}
-                    </tr>
-                    <tr>
-                        <th></th>
+                        {this.populateDates(this.state.weekSchedule.week, this.state.weekSchedule.year).map(date => <Col key={date}><h5>{date}</h5></Col>)}
+                    </Row>
 
-                        {this.populateDates(this.state.weekSchedule.week, this.state.weekSchedule.year).map(date => <th key = {date}>{date}</th>)}
-                    </tr>
-                </thead>
-                <tbody>
-                    {(this.state.weekSchedule && this.state.weekSchedule.rows && this.state.weekSchedule.rows.map((row, index) => {
-                        return (
-                            <Row
-                                key={index}
-                                rowindex={index}
-                                row={row}
-                                saveChanges={this.saveChanges}
-                                deleterow={this.deleteRow}
-                                addrow={this.addRow}
-                            />
-                        )
-                    }))}
-                    <tr>
-
-                    </tr>
-                </tbody>
-            </Table >
+                    <Row>
+                        {(this.state.weekSchedule && this.state.weekSchedule.rows && this.state.weekSchedule.rows.map((row, index) => {
+                            return (
+                                <RowData
+                                    key={index}
+                                    rowindex={index}
+                                    row={row}
+                                    saveChanges={this.saveChanges}
+                                    deleterow={this.deleteRow}
+                                    addrow={this.addRow}
+                                />
+                            )
+                        }))}
+                    </Row>
+                </Col>
+            </Container>
         )
     }
 

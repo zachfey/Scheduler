@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import RowType from '../RowType';
 import RowDetail from '../RowDetail';
 import '../table.css';
-import { Button } from 'react-bootstrap'
+import { Row } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
-import './row.css'
+import './rowData.css'
 
 
-class Row extends Component {
+class rowData extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,7 +30,7 @@ class Row extends Component {
 
     render() {
         return (
-            <tr className='border_bottom' key = {this.props.rowIndex + 'tr'}>
+            <Row key = {this.props.rowIndex + 'tr'}>
                 <RowType
                     key={this.props.rowindex + 'mainRow'}
                     time={this.state.row.time}
@@ -64,9 +65,9 @@ class Row extends Component {
                         onClick={this.addRow}
                     />
                 </td>
-            </tr>
+            </Row>
         )
     }
 }
 
-export default Row;
+export default rowData;

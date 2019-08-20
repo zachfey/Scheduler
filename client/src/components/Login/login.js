@@ -55,12 +55,12 @@ class SignUp extends Component {
       <Container>
         <br />
         <br />
-        <Row classname='loginRow'>
+        <Row className='loginRow'>
           <Col className='intro-column'>
 
             <h1 className='text-center'>Raft 1 Scheduler Portal</h1>
             <br />
-            <Card.Img src={logo} fluid />
+            <Card.Img src={logo} fluid="true" />
           </Col>
           <Col className='login-column'>
             <Card bg='light' >
@@ -68,7 +68,7 @@ class SignUp extends Component {
                 <Card.Title>Log in</Card.Title>
 
                 <Form className="form-group" >
-                  <Form.Group controlID='formUsername'>
+                  <Form.Group controlid='formUsername'>
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
                       type='username'
@@ -77,7 +77,7 @@ class SignUp extends Component {
                       value={this.state.username}
                       onChange={this.onChange} />
                   </Form.Group>
-                  <Form.Group controlID='formPassword'>
+                  <Form.Group controlid='formPassword'>
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
                       type='password'
