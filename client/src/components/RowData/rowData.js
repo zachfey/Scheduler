@@ -30,27 +30,28 @@ class rowData extends Component {
 
     render() {
         return (
-            <Row key = {this.props.rowindex + 'tr'}>
-                <RowType
-                    key={this.props.rowindex + 'mainRow'}
-                    time={this.state.row.time}
-                    type={this.state.row.type}
-                    rowindex={this.props.rowindex}
-                    saveChanges={this.props.saveChanges}
-                />
-                {this.state.row.days.map((day, index) => {
-                    return (
-                        <RowDetail
-                            key={index + this.props.rowindex}
-                            rowindex={this.props.rowindex}
-                            dayindex={index}
-                            numguests={day.numGuests}
-                            guides={day.guides}
-                            saveChanges={this.props.saveChanges}
-                        />
-                    )
-                })}
-                {/* <Col className='data tableFunctions'>
+            <React.Fragment>
+                <Row key={this.props.rowindex + 'tr'} className = 'dataRow'>
+                    <RowType
+                        key={this.props.rowindex + 'mainRow'}
+                        time={this.state.row.time}
+                        type={this.state.row.type}
+                        rowindex={this.props.rowindex}
+                        saveChanges={this.props.saveChanges}
+                    />
+                    {this.state.row.days.map((day, index) => {
+                        return (
+                            <RowDetail
+                                key={index + this.props.rowindex}
+                                rowindex={this.props.rowindex}
+                                dayindex={index}
+                                numguests={day.numGuests}
+                                guides={day.guides}
+                                saveChanges={this.props.saveChanges}
+                            />
+                        )
+                    })}
+                    {/* <Col className='data tableFunctions'>
                     <FontAwesomeIcon
                         key={'delete' + this.props.rowIndex}
                         icon={faTimes}
@@ -65,7 +66,11 @@ class rowData extends Component {
                         onClick={this.addRow}
                     />
                 </Col> */}
-            </Row>
+                </Row>
+                <Row className='addRow' onClick={this.addRow}>
+
+                </Row>
+            </React.Fragment>
         )
     }
 }
