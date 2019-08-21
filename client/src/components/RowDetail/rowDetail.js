@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import '../table.css';
 import { Button, Col } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class RowDetail extends Component {
     constructor(props) {
@@ -18,9 +20,10 @@ class RowDetail extends Component {
         this.handleArrayChange = this.handleArrayChange.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
         this.addSubtractRows = this.addSubtractRows.bind(this);
+        this.deleteRow = this.deleteRow.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.addSubtractRows()
     }
 
@@ -65,46 +68,60 @@ class RowDetail extends Component {
         }
     }
 
+    deleteRow(rowIndex){
+        this.props.deleterow(this.props.rowindex);
+    }
+
     render() {
         const guides = this.state.guides
+        const deleteButton = (<FontAwesomeIcon
+            key={'delete' + this.props.rowindex}
+            icon={faTimes}
+            pull='right'
+            onClick={this.deleteRow}
+            className='deleteButton'
+        />)
+
+
         return (
-            < Col className={this.state.edited ? 'edited data' : 'original data'} align = 'center' key = {'td' + this.props.rowindex + this.props.dayindex}>
-                <h4>Num Guests</h4>
+            < Col className={this.state.edited ? 'edited data' : 'original data'} align='center' key={'td' + this.props.rowindex + this.props.dayindex}>
+
+                <h4>Num Guests {this.props.dayindex === 6 ? deleteButton : ''}</h4>
                 <input
-                    key = {'numGuests' + this.props.rowindex + this.props.dayindex}
+                    key={'numGuests' + this.props.rowindex + this.props.dayindex}
                     value={this.state.numGuests}
                     name="numGuests"
                     onChange={this.handleChange}
                 />
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <h4>Guides</h4>
                 {
                     guides.map((guide, index) => {
                         return (
                             <React.Fragment key={'fragment' + this.props.rowindex + this.props.dayindex + index}>
                                 <input
-                                    key = {'guide' + this.props.rowindex + this.props.dayindex}
+                                    key={'guide' + this.props.rowindex + this.props.dayindex}
                                     value={guide}
                                     name={index}
                                     onChange={this.handleArrayChange}
                                 />
-                                <br key = {'br' +  + this.props.rowindex + this.props.dayindex}/>
+                                <br key={'br' + + this.props.rowindex + this.props.dayindex} />
                             </React.Fragment>
                         )
                     })
                 }
-                {this.state.edited?
-                <React.Fragment>
-                    <br/>
-                    <br/>
-                    <Button 
-                        className = 'saveChanges'
-                        onClick = {this.saveChanges}
-                    >Save</Button>
-                </React.Fragment>
-                :
-                <br/>
+                {this.state.edited ?
+                    <React.Fragment>
+                        <br />
+                        <br />
+                        <Button
+                            className='saveChanges'
+                            onClick={this.saveChanges}
+                        >Save</Button>
+                    </React.Fragment>
+                    :
+                    <br />
                 }
             </Col >
         )

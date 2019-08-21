@@ -70,7 +70,7 @@ class WeekSchedule extends Component {
         // console.log('event', event)
         // console.log('inside savechanges in weekschedule')
         let newSched = this.state.weekSchedule;
-        console.log('changes to save: ', state)
+        // console.log('changes to save: ', state)
         const rowIndex = state.rowIndex;
         // console.log(rowIndex)
         // console.log(newSched.rows)
@@ -114,7 +114,6 @@ class WeekSchedule extends Component {
         let newSched = this.state.weekSchedule
         let newRows = []
         for (let i = 0; i < newSched.rows.length; i++) {
-            console.log(i)
             if (i !== parseInt(rowIndex)) {
                 newRows.push(newSched.rows[i])
             }
@@ -135,7 +134,7 @@ class WeekSchedule extends Component {
     }
 
     render() {
-        console.log('weekSchedule', this.state.weekSchedule)
+        // console.log('weekSchedule', this.state.weekSchedule)
         return (
             // <Table striped bordered hover>
             <Container fluid='true'>
@@ -153,7 +152,7 @@ class WeekSchedule extends Component {
                     {(this.state.weekSchedule && this.state.weekSchedule.rows && this.state.weekSchedule.rows.map((row, index) => {
                         return (
                             <RowData
-                                key={index}
+                                key={row._id}
                                 rowindex={index}
                                 row={row}
                                 saveChanges={this.saveChanges}

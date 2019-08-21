@@ -22,6 +22,16 @@ th, td {
   .addRow:hover {
     height: 10px;
     background-color: darkgreen;
+    cursor: pointer;
+  }
+
+  .deleteButton {
+    color: rgb(109, 1, 1);
+  }
+  
+  .deleteButton:hover{
+    cursor: pointer;
+    color: red;
   }
 
   .saveChanges{
