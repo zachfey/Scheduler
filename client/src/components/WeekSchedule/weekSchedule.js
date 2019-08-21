@@ -141,12 +141,12 @@ class WeekSchedule extends Component {
                 <Col>
                     <Row>
                         <Col></Col>
-                        {dayArray.map(day => <Col key={day}><h4>{day}</h4></Col>)}
+                        {dayArray.map(day => <Col key={day} className = 'columnDay'><h4>{day}</h4></Col>)}
                     </Row>
                     <Row>
                         <Col></Col>
 
-                        {this.populateDates(this.state.weekSchedule.week, this.state.weekSchedule.year).map(date => <Col key={date}><h5>{date}</h5></Col>)}
+                        {this.populateDates(this.state.weekSchedule.week, this.state.weekSchedule.year).map(date => <Col key={date} className = 'columnDate'><h5>{date}</h5></Col>)}
                     </Row>
 
                     {(this.state.weekSchedule && this.state.weekSchedule.rows && this.state.weekSchedule.rows.map((row, index) => {

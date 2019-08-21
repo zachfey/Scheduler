@@ -4,7 +4,7 @@ import Months from '../../components/Months';
 import Weeks from '../../components/Weeks';
 import WeekSchedule from '../../components/WeekSchedule'
 import API from "../../utils/API";
-import { Col, Row, Container, Breadcrumb } from 'react-bootstrap'
+import { Container, Breadcrumb } from 'react-bootstrap'
 const moment = require('moment')
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -57,7 +57,7 @@ class Scheduler extends Component {
       this.setState({
         week: res,
       },
-        () => { console.table(this.state.week) }
+        // () => { console.table(this.state.week) }
       )
     })
   }
@@ -251,7 +251,7 @@ class Scheduler extends Component {
   }
 
   renderSchedule() {
-    console.log('render schedule')
+    // console.log('render schedule')
     if (this.state.selectedWeek && this.state.week) {
 
       if (parseInt(this.state.selectedWeek) === parseInt(this.state.week.week)) {

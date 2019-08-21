@@ -42,6 +42,14 @@ th, td {
     transform: translateX(-50%);
     width: 75%;
   }
+  
+  .columnDay{
+    text-align: center;
+  }
+
+  .columnDate{
+    text-align: center;
+  }
 
   .data{
     position: relative;
