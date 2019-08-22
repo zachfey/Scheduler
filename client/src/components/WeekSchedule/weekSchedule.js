@@ -74,6 +74,7 @@ class WeekSchedule extends Component {
         const rowIndex = state.rowIndex;
         // console.log(rowIndex)
         // console.log(newSched.rows)
+        // console.log('inside saveChanges, state: ' , state)
         switch (state.category) {
             case 'type':
                 const { time, type } = state;
@@ -90,7 +91,7 @@ class WeekSchedule extends Component {
                 const { dayIndex, numGuests, guides } = state;
                 newSched.rows[rowIndex].days[dayIndex].numGuests = numGuests;
                 newSched.rows[rowIndex].days[dayIndex].guides = guides;
-                console.log('newSched detail', newSched)
+                // console.log('newSched detail', newSched)
                 API.updateWeek(newSched, res => {
                     cb()
                     // console.log('saved data', res)
@@ -98,10 +99,12 @@ class WeekSchedule extends Component {
                 break;
 
             case 'deleteRow':
+                // console.log('deleting row')
                 API.updateWeek(newSched, res => cb(res))
                 break;
 
             case 'addRow':
+                // console.log('adding row')
                 API.updateWeek(newSched, res => cb(res))
                 break;
 
