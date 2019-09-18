@@ -21,7 +21,7 @@ Currently, a working version of the app is complete. The user is able to modify 
 Scheduler is a solo project completed entirely by me.
 
 ## Challenges
-Deployment to Heroku is currently giving me the most trouble. I really need to take the time to understand the deployment process: when deployment scripts are called, what do they need to do, what build packs do, etc.
+Deployment to Heroku gave me some issues. Once I took the time to understand the deployment process: when deployment scripts are called, what do they need to do, what build packs do, etc, I was able to get it deployed without much further issue.
 
 Another challenge I faced was having the authentication persist accross sessions and page refreshes. Initially, an easy solution was to use client-side storage, but I decided that wouldn't be secure. Eventually, I was able to use a session stored in MongoDB to keep persistent authentication on the server-side.
 
